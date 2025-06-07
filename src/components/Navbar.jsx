@@ -1,11 +1,12 @@
 export default function Navbar() {
   const navItems = [
-    { title: 'Home', ref: '/' }
+    { title: 'Home', ref: '/' },
+    { title: 'Calculators', ref: '/calculators' },
   ];
 
   return (
     <nav className="bg-stone-800 sticky top-0 z-50">
-      <div className="mx-auto h-16 justify-center flex items-center">
+      <div className="mx-auto h-16 flex justify-between items-center pl-4">
         <ul className="flex space-x-4">
           {navItems.map((item, index) => (
             <li key={item.title}>
