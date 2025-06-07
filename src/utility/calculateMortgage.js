@@ -1,5 +1,5 @@
 export default function calculateMortgage(inputs) {
-  const { loanAmount, interestRate, loanTerm, propertyTax, homeownersInsurance, pmi } = inputs;
+  const { loanAmount, interestRate, loanTerm, propertyTax, homeownersInsurance, pmi, addExtraPayment, extraPayment } = inputs;
 
   let mortgageData = {};
   let payments = [];
@@ -8,49 +8,29 @@ export default function calculateMortgage(inputs) {
     return [null, []];
   }
 
-  const monthlyInterestRate = +(interestRate / 100 / 12);
-  const numberOfPayments = +(loanTerm * 12);
-  const principalAndInterest = +((loanAmount * monthlyInterestRate) / (1 - Math.pow(1 + monthlyInterestRate, -numberOfPayments)));
-  const totalMonthlyPayment = +(principalAndInterest + (propertyTax || 0) + (homeownersInsurance || 0) + (pmi || 0));
-  const totalInterest = +(principalAndInterest * numberOfPayments - loanAmount);
-  const totalCostOfLoan = +(principalAndInterest * numberOfPayments);
-  const totalTax = +(propertyTax * numberOfPayments);
-  const totalInsurance = +(homeownersInsurance * numberOfPayments);
-  const totalPMI = +(pmi * numberOfPayments);
-  const totalEscrow = +(totalTax + totalInsurance + totalPMI);
-  const totalPaid = +(totalCostOfLoan + totalEscrow);
+  const extra = addExtraPayment ? +extraPayment : 0;
 
-  mortgageData = {
-    principalAndInterest,
-    totalMonthlyPayment,
-    loanAmount,
-    interestRate,
-    loanTerm,
-    propertyTax,
-    homeownersInsurance,
-    pmi,
-    totalInterest: totalInterest,
-    totalCostOfLoan: totalCostOfLoan,
-    totalTax: totalTax,
-    totalInsurance: totalInsurance,
-    totalPMI: totalPMI,
-    totalEscrow: totalEscrow,
-    totalPaid: totalPaid,
-  };
+  const monthlyInterestRate = +(interestRate / 100 / 12);
+  const originalLoanTermInMonths = +(loanTerm * 12);
+  const originalPrincipalAndInterest = +(loanAmount * monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -originalLoanTermInMonths)));
+  const principalAndInterest = +((loanAmount * monthlyInterestRate) / (1 - Math.pow(1 + monthlyInterestRate, -originalLoanTermInMonths)) + (extra));
+  const totalMonthlyPayment = +(principalAndInterest + (propertyTax || 0) + (homeownersInsurance || 0) + (pmi || 0));
 
   let totalPrincipalPaid = 0;
   let totalInterestPaid = 0;
+  let numberOfPayments = 0;
   let balance = +loanAmount;
-  for (let i = 0; i < numberOfPayments; i++) {
+  while (balance > 0) {
+    numberOfPayments++;
     const startBalance = balance;
     const interestForThisMonth = balance * monthlyInterestRate;
-    const principalForThisMonth = principalAndInterest - interestForThisMonth;
+    const principalForThisMonth = Math.min(principalAndInterest - interestForThisMonth, balance);
     totalPrincipalPaid += principalForThisMonth;
     totalInterestPaid += interestForThisMonth;
     balance -= principalForThisMonth;
 
     payments.push({
-      month: i + 1,
+      month: numberOfPayments,
       principal: +principalForThisMonth,
       interest: +interestForThisMonth,
       startBalance: +startBalance,
@@ -61,7 +41,48 @@ export default function calculateMortgage(inputs) {
       totalPaid: +(totalPrincipalPaid + totalInterestPaid),
       percentPaid: +(totalPrincipalPaid / loanAmount * 100),
     });
+
+    if (balance < 0.01) {
+      balance = 0; // Ensure balance does not go negative due to rounding errors
+    }
   }
+
+  const baseTotalInterest = +(originalPrincipalAndInterest * originalLoanTermInMonths - loanAmount);
+  const baseTotalCostOfLoan = +(originalPrincipalAndInterest * originalLoanTermInMonths);
+  const totalInterest = totalInterestPaid;
+  const totalCostOfLoan = +(totalInterest + loanAmount);
+  const totalTax = +(propertyTax * numberOfPayments);
+  const totalInsurance = +(homeownersInsurance * numberOfPayments);
+  const totalPMI = +(pmi * numberOfPayments);
+  const totalEscrow = +(totalTax + totalInsurance + totalPMI);
+  const baseTotalPaid = +(baseTotalCostOfLoan + totalEscrow);
+  const totalPaid = +(totalCostOfLoan + totalEscrow);
+  const interestSaved = Math.max(+(baseTotalInterest - totalInterest), 0);
+
+  mortgageData = {
+    principalAndInterest,
+    totalMonthlyPayment,
+    loanAmount,
+    interestRate,
+    loanTerm,
+    propertyTax,
+    homeownersInsurance,
+    pmi,
+    baseTotalInterest,
+    baseTotalCostOfLoan,
+    baseTotalPaid,
+    totalInterest,
+    totalCostOfLoan,
+    totalPaid,
+    totalTax,
+    totalInsurance,
+    totalPMI,
+    totalEscrow,
+    totalPaid,
+    interestSaved,
+    numberOfPayments,
+    extra
+  };
 
   return [mortgageData, payments];
 }

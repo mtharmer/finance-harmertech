@@ -11,6 +11,8 @@ const initialInputs = {
   propertyTax: null,
   homeownersInsurance: null,
   pmi: null,
+  addExtraPayment: false,
+  extraPayment: null,
 }
 
 export default function MortgageCalculator() {
@@ -23,6 +25,13 @@ export default function MortgageCalculator() {
     }));
   }
 
+  function handleRadioChange(name, value) {
+    setInputs((prevInputs) => ({
+      ...prevInputs,
+      [name]: value,
+    }));
+  }
+
   const [mortgageData, mortgagePayments] = calculateMortgage(inputs);
 
   return (
@@ -30,13 +39,15 @@ export default function MortgageCalculator() {
       <h1 className="text-3xl font-bold text-center mt-10">
         Mortgage Calculator
       </h1>
-      <MortgageInputs inputs={inputs} onInputChange={handleInputChange} />
-      {mortgageData && (
-        <section>
-          <MortgageResults results={mortgageData} />
-          {/* <MortgageGraph results={mortgageData} /> */}
-        </section>
-      )}
+      <div className="flex justify-center">
+        <MortgageInputs inputs={inputs} onInputChange={handleInputChange} onRadioChange={handleRadioChange} />
+        {mortgageData && (
+          <section>
+            <MortgageResults results={mortgageData} />
+            {/* <MortgageGraph results={mortgageData} /> */}
+          </section>
+        )}
+      </div>
       <MortgageAmortization results={mortgagePayments} />
     </>
   );
