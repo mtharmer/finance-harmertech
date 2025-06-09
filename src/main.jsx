@@ -11,9 +11,9 @@ import EmailPassword from 'supertokens-web-js/recipe/emailpassword'
 
 SuperTokens.init({
     appInfo: {
-        apiDomain: "http://localhost:3001",
+        apiDomain: import.meta.env.VITE_FINANCE_API_URL,
         apiBasePath: "/auth",
-        appName: "...",
+        appName: "finance-harmertech"
     },
     recipeList: [
         Session.init(),

@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import doesSessionExist from "../utility/doesSessionExist";
 import signOut from "../utility/signOut";
 
 export default function Navbar() {
@@ -17,7 +15,9 @@ export default function Navbar() {
     { title: 'Login', ref: '/login' },
   ];
 
-  if (localStorage.getItem("email")) {
+  const isLoggedIn = localStorage.getItem("userId")
+
+  if (isLoggedIn) {
     navItems.push(...authItems);
   } else {
     navItems.push(...nonAuthItems);
@@ -35,7 +35,7 @@ export default function Navbar() {
               {index < navItems.length - 1 && <span className="text-stone-400 pl-4">|</span>}
             </li>
           ))}
-          {localStorage.getItem("email") && (
+          {isLoggedIn && (
             <li>
               <span className="text-stone-400 pr-4">|</span>
               <button href="/logout" className="text-white hover:text-stone-300 cursor-pointer" onClick={signOut}>
