@@ -1,4 +1,4 @@
-import { login } from "../../api";
+import signIn from '../../utility/signIn';
 import { useRef } from "react";
 
 export default function Login() {
@@ -7,22 +7,7 @@ export default function Login() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const credentials = {
-      email: emailRef.current.value,
-      password: passwordRef.current.value,
-    };
-    try {
-      const response = await login(credentials);
-      if (response.success) {
-        alert("Login successful!");
-        window.location.href = "/"; // Redirect to home page
-      } else {
-        alert("Login failed: " + response.message);
-      }
-    } catch (error) {
-      console.error("Login error:", error);
-      alert("An error occurred during login. Please try again.");
-    }
+    signIn(emailRef.current.value, passwordRef.current.value);
   }
 
   return (

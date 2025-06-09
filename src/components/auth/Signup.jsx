@@ -1,32 +1,13 @@
-import { signup } from "../../api";
 import { useRef } from "react";
+import signUpClicked from '../../utility/signUpClicked';
 
 export default function Signup() {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const confirmPasswordRef = useRef();
 
   async function handleSubmit(event) {
     event.preventDefault();
-
-    const userData = {
-      email: emailRef.current.value,
-      password: passwordRef.current.value,
-      confirmPassword: confirmPasswordRef.current.value,
-    };
-
-    try {
-      const response = await signup(userData);
-      if (response.success) {
-        alert("Signup successful! Please log in.");
-        window.location.href = "/login"; // Redirect to login page
-      } else {
-        alert("Signup failed: " + response.message);
-      }
-    } catch (error) {
-      console.error("Signup error:", error);
-      alert("An error occurred during signup. Please try again.");
-    }
+    signUpClicked(emailRef.current.value, passwordRef.current.value);
   }
   return (
     <div className="flex justify-center items-center h-screen">
@@ -50,16 +31,6 @@ export default function Signup() {
               type="password"
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your password"
-              required
-            />
-          </div>
-          <div className="mb-6">
-            <label className="block text-gray-700 mb-2">Confirm Password</label>
-            <input
-              ref={confirmPasswordRef}
-              type="password"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Confirm your password"
               required
             />
           </div>
