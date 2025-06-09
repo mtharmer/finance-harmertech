@@ -2,6 +2,8 @@ export default function Navbar() {
   const navItems = [
     { title: 'Home', ref: '/' },
     { title: 'Calculators', ref: '/calculators' },
+    { title: 'Signup', ref: '/signup' },
+    { title: 'Login', ref: '/login' },
   ];
 
   return (
