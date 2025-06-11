@@ -78,7 +78,6 @@ export default function calculateMortgage(inputs) {
     totalInsurance,
     totalPMI,
     totalEscrow,
-    totalPaid,
     interestSaved,
     numberOfPayments,
     extra
