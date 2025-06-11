@@ -1,4 +1,4 @@
-import formatCurrency from "../../../utility/formatCurrency";
+import { formatCurrency } from "../../../utility/formatter";
 
 export default function MortgageAmortization({results}) {
   return (

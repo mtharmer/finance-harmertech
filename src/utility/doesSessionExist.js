@@ -10,9 +10,9 @@ export default async function doesSessionExist() {
     } else {
         // user has not logged in yet
         console.log("Session does not exist");
-        localStorage.removeItem("email");
+        localStorage.removeItem("userId");
         // you can redirect to the login page or show a message
-        window.location.href = "/login";
-        // return false;
+        // window.location.href = "/login";
+        return false;
     }
 }

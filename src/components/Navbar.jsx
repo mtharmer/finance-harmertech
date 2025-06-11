@@ -1,12 +1,25 @@
 import signOut from "../utility/signOut";
+import doesSessionExist from "../utility/doesSessionExist";
+import { useEffect, useState } from "react";
 
 export default function Navbar() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    async function checkSession() {
+      const exists = await doesSessionExist();
+      setIsLoggedIn(exists);
+    }
+    checkSession();
+  }, [])
+
   const navItems = [
     { title: 'Home', ref: '/' },
     { title: 'Calculators', ref: '/calculators' },
   ];
 
   const authItems = [
+    { title: 'Debts', ref: '/debts' },
     { title: 'Profile', ref: '/profile' },
   ]
 
@@ -14,8 +27,6 @@ export default function Navbar() {
     { title: 'Signup', ref: '/signup' },
     { title: 'Login', ref: '/login' },
   ];
-
-  const isLoggedIn = localStorage.getItem("userId")
 
   if (isLoggedIn) {
     navItems.push(...authItems);
