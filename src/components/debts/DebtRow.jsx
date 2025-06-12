@@ -4,7 +4,7 @@ export default function DebtRow({debt, onClick}) {
   return (
     <div 
       className="w-full h-24 bg-slate-100 rounded-2xl border-2 border-slate-800 my-2 cursor-pointer flex flex-row justify-between"
-      onClick={() => onClick(debt._id)}
+      onClick={() => onClick(debt.id)}
     >
       <div className="flex flex-col justify-center w-xl text-left mx-2">
         <h3 className="text-xl">{debt.name}</h3>

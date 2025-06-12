@@ -24,7 +24,7 @@ export default function DebtModal({onClickSave, onClickClose, initialDebt, onCli
   }
 
   function handleDelete() {
-    onClickDelete(debt._id);
+    onClickDelete(debt.id);
     onClickClose();
   }
 

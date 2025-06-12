@@ -14,7 +14,7 @@ export const createDebt = (debtData) => {
 }
 
 export const updateDebt = (debtData) => {
-  return client.put(`/debts/update/${debtData._id}`, debtData)
+  return client.put(`/debts/update/${debtData.id}`, debtData)
 }
 
 export const deleteDebt = (id) => {
