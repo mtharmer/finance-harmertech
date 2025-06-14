@@ -13,15 +13,16 @@ export default function Debts() {
   const [modifying, setModifying] = useState(modifyInitialState);
   const [selectedDebt, setSelectedDebt] = useState({});
 
-  useEffect(() => {
-    async function getDebts() {
-      try {
-        const data = await debtList();
-        setDebts(data);
-      } catch (err) {
-        console.error(err);
-      }
+  async function getDebts() {
+    try {
+      const data = await debtList();
+      setDebts(data);
+    } catch (err) {
+      console.error(err);
     }
+  }
+
+  useEffect(() => {
     getDebts();
   }, []);
 
@@ -34,31 +35,34 @@ export default function Debts() {
     setModifying({creating: true, editing: false});
   }
 
-  function handleSaveNewDebt(debt) {
+  async function handleSaveNewDebt(debt) {
     // Error checking for fields
 
     // Add promise chaining for better handling
     try {
-      createDebt(debt);
+      await createDebt(debt);
+      getDebts();
     } catch (err) {
       console.error(err);
     }
   }
 
-  function handleUpdateDebt(debt) {
+  async function handleUpdateDebt(debt) {
     // Error checking for fields
 
     // Add promise chaining for better handling
     try {
-      updateDebt(debt)
+      await updateDebt(debt);
+      getDebts();
     } catch (err) {
       console.error(err);
     }
   }
 
-  function handleDelete(id) {
+  async function handleDelete(id) {
     try {
-      deleteDebt(id);
+      await deleteDebt(id);
+      getDebts();
     } catch (err) {
       console.error(err);
     }
