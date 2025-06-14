@@ -1,0 +1,15 @@
+services:
+  finance:
+    image: 273058101644.dkr.ecr.us-east-1.amazonaws.com/finance-prod:latest
+    build:
+      context: .
+      platforms:
+      - "linux/amd64"
+    hostname: finance
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - VITE_FINANCE_API_URL
+    ports:
+      - 5173:5173
+    network_mode: host
