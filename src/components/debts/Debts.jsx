@@ -77,9 +77,13 @@ export default function Debts() {
       {modifying.editing && <DebtModal onClickSave={handleUpdateDebt} onClickClose={handleClose} initialDebt={selectedDebt} isEditing onClickDelete={handleDelete} /> }
       {modifying.creating && <DebtModal onClickSave={handleSaveNewDebt} onClickClose={handleClose} initialDebt={{}} /> }
       <div className="mx-2">
-        <h1 className="text-3xl font-bold text-center my-10">Debts</h1>
+        <h1 className="text-3xl font-bold text-center my-10" data-testId="debts-header">Debts</h1>
         <div className="flex flex-col justify-center content-center rounded-2xl text-center my-4 mx-16">
-          <button className="border-slate-800 border-2 rounded-2xl cursor-pointer bg-slate-100 text-slate-700 h-12" onClick={handleAddDebt}>
+          <button 
+            className="border-slate-800 border-2 rounded-2xl cursor-pointer bg-slate-100 text-slate-700 h-12" 
+            onClick={handleAddDebt}
+            data-testId="debts-add-button"
+          >
             Add New Debt +
           </button>
         </div>
