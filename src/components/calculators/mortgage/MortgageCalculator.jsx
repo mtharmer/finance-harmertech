@@ -35,7 +35,7 @@ export default function MortgageCalculator() {
   const [mortgageData, mortgagePayments] = calculateMortgage(inputs);
 
   return (
-    <>
+    <div data-testid='mortgage-container'>
       <h1 className="text-3xl font-bold text-center mt-10">
         Mortgage Calculator
       </h1>
@@ -49,6 +49,6 @@ export default function MortgageCalculator() {
         )}
       </div>
       <MortgageAmortization results={mortgagePayments} />
-    </>
+    </div>
   );
 }

@@ -1,6 +1,6 @@
 import CalculatorSidebar from "./CalculatorSidebar";
-import MortgageCalculator from "./calculators/mortgage/MortgageCalculator";
-import LoanCalculator from "./calculators/LoanCalculator";
+import MortgageCalculator from "./mortgage/MortgageCalculator";
+import LoanCalculator from "./LoanCalculator";
 
 import { useState } from "react";
 
