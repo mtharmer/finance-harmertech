@@ -1,5 +1,5 @@
 import Home from "./components/Home";
-import Calculators from "./components/Calculators";
+import Calculators from "./components/calculators/Calculators";
 import Signup from "./components/auth/Signup";
 import Login from "./components/auth/Login";
 import { Routes, Route } from "react-router";
