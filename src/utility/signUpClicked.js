@@ -33,7 +33,7 @@ export default async function signUpClicked(email, password) {
         } else {
             // sign up successful. The session tokens are automatically handled by
             // the frontend SDK.
-            window.location.href = "/"
+            window.location.href = "/login"
         }
     } catch (err) {
         if (err.isSuperTokensGeneralError === true) {

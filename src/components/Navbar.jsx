@@ -1,5 +1,5 @@
 import signOut from "../utility/signOut";
-import doesSessionExist from "../utility/doesSessionExist";
+import doesSessionExist from "../utility/hasSession";
 import { useEffect, useState } from "react";
 
 export default function Navbar() {

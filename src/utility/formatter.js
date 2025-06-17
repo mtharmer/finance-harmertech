@@ -1,4 +1,5 @@
 export function formatCurrency(amount) {
+  if (!Number(amount)) return amount;
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
@@ -6,6 +7,7 @@ export function formatCurrency(amount) {
 }
 
 export function formatPercent(amount) {
+  if (!Number(amount)) return amount;
   return new Intl.NumberFormat('en-US', {
     style: 'percent',
     maximumFractionDigits: 2

@@ -1,10 +1,10 @@
 import Navbar from '../../src/components/Navbar';
 import { render, screen } from '@testing-library/react';
-import doesSessionExist from '../../src/utility/doesSessionExist';
+import hasSession from '../../src/utility/hasSession';
 
 describe('Navbar', () => {
   beforeEach(() => {
-    vi.mock('../../src/utility/doesSessionExist', async () => {
+    vi.mock('../../src/utility/hasSession', async () => {
       return {
         default: vi.fn(async () => false)
       }
@@ -26,16 +26,14 @@ describe('Navbar', () => {
 
   describe('when logged in', () => {
     beforeEach(() => {
-      doesSessionExist.mockReturnValue(true);
+      hasSession.mockReturnValue(true);
     })
     it('shows the debts link', async () => {
-      // doesSessionExist.mockReturnValue(true);
       render(<Navbar />);
       const debts = await screen.findByText(/Debts/i);
       expect(debts).toBeInTheDocument();
     });
     it('shows the correct authenticated links', async () => {
-      // doesSessionExist.mockReturnValue(true);
       render(<Navbar />);
       const logout = await screen.findByText(/Logout/i);
       const login = screen.queryByText(/Login/i);

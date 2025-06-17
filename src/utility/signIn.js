@@ -27,7 +27,6 @@ export default async function signInClicked(email, password) {
             // can tell you so you know why their sign in was not allowed.
             window.alert(response.reason)
         } else {
-            localStorage.setItem("userId", response.user.id);
             // sign in successful. The session tokens are automatically handled by
             // the frontend SDK.
             window.location.href = "/"
