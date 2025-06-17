@@ -65,6 +65,15 @@ describe('Debts', () => {
       const modal = screen.getByTestId("mocked-modal");
       expect(modal).toBeInTheDocument();
     });
+
+    it('logs an error on api failure', async () => {
+      const spy = vi.spyOn(console, 'error')
+      api.debtList.mockRejectedValue('get debts error');
+      render(<Debts />);
+      // Make sure the page has gotten past useEffect
+      await screen.findByTestId("debts-header");
+      expect(spy).toHaveBeenCalledWith('get debts error');
+    })
   });
 
   describe('modal', () => {
@@ -124,6 +133,17 @@ describe('Debts', () => {
         const spy = vi.spyOn(api, 'createDebt');
         await actWrapper(fireEvent.click(createButton));
         expect(spy).toHaveBeenCalled();
+        spy.mockReset();
+      });
+      it('logs an error on failure', async () => {
+        const spy = vi.spyOn(console, 'error')
+        api.createDebt.mockRejectedValue('create error');
+        render(<Debts />);
+        const addButton = screen.getByTestId("debts-add-button");
+        await actWrapper(fireEvent.click(addButton));
+        const createButton = screen.getByTestId('debts-modal-save-button');
+        await actWrapper(fireEvent.click(createButton));
+        expect(spy).toHaveBeenCalledWith('create error');
       });
     });
 
@@ -137,6 +157,16 @@ describe('Debts', () => {
         await actWrapper(fireEvent.click(updateButton));
         expect(spy).toHaveBeenCalled();
       });
+      it('logs an error on failure', async () => {
+        const spy = vi.spyOn(console, 'error');
+        api.updateDebt.mockRejectedValue('update error');
+        render(<Debts />);
+        const debtRow = await screen.findByText("Sample Debt");
+        await actWrapper(fireEvent.click(debtRow));
+        const updateButton = screen.getByTestId('debts-modal-save-button');
+        await actWrapper(fireEvent.click(updateButton));
+        expect(spy).toHaveBeenCalledWith('update error');
+      });
     });
 
     describe('when deleting a debt', () => {
@@ -148,6 +178,16 @@ describe('Debts', () => {
         const spy = vi.spyOn(api, 'deleteDebt');
         await actWrapper(fireEvent.click(deleteButton));
         expect(spy).toHaveBeenCalled();
+      });
+      it('logs an error on failure', async () => {
+        const spy = vi.spyOn(console, 'error');
+        api.deleteDebt.mockRejectedValue('delete error');
+        render(<Debts />);
+        const debtRow = await screen.findByText("Sample Debt");
+        await actWrapper(fireEvent.click(debtRow));
+        const deleteButton = screen.getByTestId('debts-modal-delete-button');
+        await actWrapper(fireEvent.click(deleteButton));
+        expect(spy).toHaveBeenCalledWith('delete error');
       });
     });
 

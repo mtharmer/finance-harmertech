@@ -20,7 +20,6 @@ export default function Navbar() {
 
   const authItems = [
     { title: 'Debts', ref: '/debts' },
-    { title: 'Profile', ref: '/profile' },
   ]
 
   const nonAuthItems = [

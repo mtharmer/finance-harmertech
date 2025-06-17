@@ -1,4 +1,4 @@
-import Sidebar from "./Sidebar";
+import CalculatorSidebar from "./CalculatorSidebar";
 import MortgageCalculator from "./calculators/mortgage/MortgageCalculator";
 import LoanCalculator from "./calculators/LoanCalculator";
 
@@ -29,7 +29,7 @@ export default function Calculators() {
 
   return (
     <>
-      <Sidebar onSelectTab={handleSelectTab} />
+      <CalculatorSidebar onSelectTab={handleSelectTab} />
       <main className="ml-64 p-4">
         {content}
       </main>

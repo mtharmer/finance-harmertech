@@ -1,6 +1,6 @@
 import SidebarButton from "./SidebarButton";
 
-export default function Sidebar({onSelectTab}) {
+export default function CalculatorSidebar({onSelectTab}) {
   return (
     <aside className="w-52 fixed top-16 left-0 h-full bg-gray-800 text-white p-4">
       <ul className="space-y-2">
