@@ -1,6 +1,6 @@
-import Sidebar from "./Sidebar";
-import MortgageCalculator from "./calculators/mortgage/MortgageCalculator";
-import LoanCalculator from "./calculators/LoanCalculator";
+import CalculatorSidebar from "./CalculatorSidebar";
+import MortgageCalculator from "./mortgage/MortgageCalculator";
+import LoanCalculator from "./LoanCalculator";
 
 import { useState } from "react";
 
@@ -29,7 +29,7 @@ export default function Calculators() {
 
   return (
     <>
-      <Sidebar onSelectTab={handleSelectTab} />
+      <CalculatorSidebar onSelectTab={handleSelectTab} />
       <main className="ml-64 p-4">
         {content}
       </main>

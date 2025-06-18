@@ -1,5 +1,5 @@
 import signOut from "../utility/signOut";
-import doesSessionExist from "../utility/doesSessionExist";
+import doesSessionExist from "../utility/hasSession";
 import { useEffect, useState } from "react";
 
 export default function Navbar() {
@@ -20,7 +20,6 @@ export default function Navbar() {
 
   const authItems = [
     { title: 'Debts', ref: '/debts' },
-    { title: 'Profile', ref: '/profile' },
   ]
 
   const nonAuthItems = [

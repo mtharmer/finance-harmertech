@@ -14,7 +14,8 @@ export default function calculateMortgage(inputs) {
   const originalLoanTermInMonths = +(loanTerm * 12);
   const originalPrincipalAndInterest = +(loanAmount * monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -originalLoanTermInMonths)));
   const principalAndInterest = +((loanAmount * monthlyInterestRate) / (1 - Math.pow(1 + monthlyInterestRate, -originalLoanTermInMonths)) + (extra));
-  const totalMonthlyPayment = +(principalAndInterest + (propertyTax || 0) + (homeownersInsurance || 0) + (pmi || 0));
+  const totalEscrowPayment = +(propertyTax || 0) + (homeownersInsurance || 0) + (pmi || 0)
+  const totalMonthlyPayment = +(principalAndInterest + totalEscrowPayment);
 
   let totalPrincipalPaid = 0;
   let totalInterestPaid = 0;
@@ -35,7 +36,7 @@ export default function calculateMortgage(inputs) {
       interest: +interestForThisMonth,
       startBalance: +startBalance,
       endBalance: +balance,
-      totalPayment: +totalMonthlyPayment,
+      totalPayment: +(principalForThisMonth + interestForThisMonth + totalEscrowPayment),
       totalPrincipalPaid: +totalPrincipalPaid,
       totalInterestPaid: +totalInterestPaid,
       totalPaid: +(totalPrincipalPaid + totalInterestPaid),

@@ -10,15 +10,15 @@ import Session from 'supertokens-web-js/recipe/session';
 import EmailPassword from 'supertokens-web-js/recipe/emailpassword'
 
 SuperTokens.init({
-    appInfo: {
-        apiDomain: import.meta.env.VITE_FINANCE_API_URL,
-        apiBasePath: "/auth",
-        appName: "finance-harmertech"
-    },
-    recipeList: [
-        Session.init(),
-        EmailPassword.init(),
-    ],
+  appInfo: {
+      apiDomain: import.meta.env.VITE_FINANCE_API_URL,
+      apiBasePath: "/auth",
+      appName: "finance-harmertech"
+  },
+  recipeList: [
+      Session.init(),
+      EmailPassword.init(),
+  ],
 });
 
 createRoot(document.getElementById('root')).render(

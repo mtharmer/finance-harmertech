@@ -1,7 +1,6 @@
-import Session from "supertokens-web-js/recipe/session";
+import { signOut } from "supertokens-web-js/recipe/session";
 
 export default async function logout () {
-  await Session.signOut(); 
-  localStorage.removeItem("userId"); // Clear any stored user data
-  window.location.href = "/"; // or to wherever your logic page is
+  await signOut();
+  window.location.href = "/";
 }
