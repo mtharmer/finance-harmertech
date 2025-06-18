@@ -1,5 +1,6 @@
 import { signUp } from "supertokens-web-js/recipe/emailpassword";
 import signUpClicked from '../../src/utility/signUpClicked.js';
+import * as notify from '../../src/utility/notifications.js';
 
 const email = 'user@example.com';
 const password = 'somepassword';
@@ -21,7 +22,7 @@ describe('signUp', () => {
       it('alerts if the form field error was on email', async () => {
         const response = {status: 'FIELD_ERROR', formFields: [{id: 'email', error: 'email error'}]}
         signUp.mockReturnValue(response);
-        const spy = vi.spyOn(window, 'alert').mockImplementation(() => {});
+        const spy = vi.spyOn(notify, 'alert').mockImplementation(() => {});
         await signUpClicked(email, password);
         expect(spy).toHaveBeenCalledWith('email error');
         spy.mockReset();
@@ -29,7 +30,7 @@ describe('signUp', () => {
       it('alerts if the error was on password', async () => {
         const response = {status: 'FIELD_ERROR', formFields: [{id: 'password', error: 'password error'}]}
         signUp.mockReturnValue(response);
-        const spy = vi.spyOn(window, 'alert').mockImplementation(() => {});
+        const spy = vi.spyOn(notify, 'alert').mockImplementation(() => {});
         await signUpClicked(email, password);
         expect(spy).toHaveBeenCalledWith('password error');
         spy.mockReset();
@@ -39,7 +40,7 @@ describe('signUp', () => {
       it('alerts in a window with the reason', async () => {
         const response = {status: 'SIGN_UP_NOT_ALLOWED', reason: 'disabled'}
         signUp.mockReturnValue(response);
-        const spy = vi.spyOn(window, 'alert').mockImplementation(() => {});
+        const spy = vi.spyOn(notify, 'alert').mockImplementation(() => {});
         await signUpClicked(email, password);
         expect(spy).toHaveBeenCalledWith('disabled');
         spy.mockReset();
@@ -63,7 +64,7 @@ describe('signUp', () => {
       it('alerts with the error message', async () => {
         const response = {isSuperTokensGeneralError: true, message: 'supertokens error'}
         signUp.mockRejectedValue(response);
-        const spy = vi.spyOn(window, 'alert').mockImplementation(() => {});
+        const spy = vi.spyOn(notify, 'alert').mockImplementation(() => {});
         await signUpClicked(email, password);
         expect(spy).toHaveBeenCalledWith('supertokens error');
         spy.mockReset();
@@ -73,7 +74,7 @@ describe('signUp', () => {
       it('alerts with the error message', async () => {
         const response = {isSupertokensError: true, message: 'supertokens error'}
         signUp.mockRejectedValue('general error');
-        const spy = vi.spyOn(window, 'alert').mockImplementation(() => {});
+        const spy = vi.spyOn(notify, 'alert').mockImplementation(() => {});
         await signUpClicked(email, password);
         expect(spy).toHaveBeenCalledWith('Oops! Something went wrong.');
         spy.mockReset();

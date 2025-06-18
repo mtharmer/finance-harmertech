@@ -3,6 +3,7 @@ import Debts from '../../../src/components/debts/Debts'
 import { afterEach, beforeEach } from 'vitest';
 import * as api from '../../../src/api';
 import { actWrapper } from '../../helpers';
+import * as notify from '../../../src/utility/notifications';
 
 const debtList = [{id: 1, name: "Sample Debt"}, {id: 2, name: "Another Debt"}];
 
@@ -67,7 +68,7 @@ describe('Debts', () => {
     });
 
     it('logs an error on api failure', async () => {
-      const spy = vi.spyOn(console, 'error')
+      const spy = vi.spyOn(notify, 'alert')
       api.debtList.mockRejectedValue('get debts error');
       render(<Debts />);
       // Make sure the page has gotten past useEffect
@@ -135,8 +136,19 @@ describe('Debts', () => {
         expect(spy).toHaveBeenCalled();
         spy.mockReset();
       });
-      it('logs an error on failure', async () => {
-        const spy = vi.spyOn(console, 'error')
+      it('creates toast on success', async () => {
+        api.createDebt.mockReturnValue('success');
+        const spy = vi.spyOn(notify, 'success');
+        render(<Debts />);
+        const addButton = screen.getByTestId("debts-add-button");
+        await actWrapper(fireEvent.click(addButton));
+        const createButton = screen.getByTestId('debts-modal-save-button');
+        await actWrapper(fireEvent.click(createButton));
+        expect(spy).toHaveBeenCalledWith('New debt was successfully created!');
+        spy.mockReset();
+      });
+      it('creates toast on failure', async () => {
+        const spy = vi.spyOn(notify, 'alert')
         api.createDebt.mockRejectedValue('create error');
         render(<Debts />);
         const addButton = screen.getByTestId("debts-add-button");
@@ -156,9 +168,21 @@ describe('Debts', () => {
         const spy = vi.spyOn(api, 'updateDebt');
         await actWrapper(fireEvent.click(updateButton));
         expect(spy).toHaveBeenCalled();
+        spy.mockReset();
+      });
+      it('creates toast on success', async () => {
+        api.updateDebt.mockReturnValue('success');
+        const spy = vi.spyOn(notify, 'success');
+        render(<Debts />);
+        const debtRow = await screen.findByText("Sample Debt");
+        await actWrapper(fireEvent.click(debtRow));
+        const updateButton = screen.getByTestId('debts-modal-save-button');
+        await actWrapper(fireEvent.click(updateButton));
+        expect(spy).toHaveBeenCalledWith('Debt was successfully updated!');
+        spy.mockReset();
       });
       it('logs an error on failure', async () => {
-        const spy = vi.spyOn(console, 'error');
+        const spy = vi.spyOn(notify, 'alert');
         api.updateDebt.mockRejectedValue('update error');
         render(<Debts />);
         const debtRow = await screen.findByText("Sample Debt");
@@ -166,6 +190,7 @@ describe('Debts', () => {
         const updateButton = screen.getByTestId('debts-modal-save-button');
         await actWrapper(fireEvent.click(updateButton));
         expect(spy).toHaveBeenCalledWith('update error');
+        spy.mockReset();
       });
     });
 
@@ -179,8 +204,19 @@ describe('Debts', () => {
         await actWrapper(fireEvent.click(deleteButton));
         expect(spy).toHaveBeenCalled();
       });
+      it('creates toast on success', async () => {
+        api.deleteDebt.mockReturnValue('success');
+        const spy = vi.spyOn(notify, 'success');
+        render(<Debts />);
+        const debtRow = await screen.findByText("Sample Debt");
+        await actWrapper(fireEvent.click(debtRow));
+        const deleteButton = screen.getByTestId('debts-modal-delete-button');
+        await actWrapper(fireEvent.click(deleteButton));
+        expect(spy).toHaveBeenCalledWith('Debt was successfully deleted!');
+        spy.mockReset();
+      });
       it('logs an error on failure', async () => {
-        const spy = vi.spyOn(console, 'error');
+        const spy = vi.spyOn(notify, 'alert');
         api.deleteDebt.mockRejectedValue('delete error');
         render(<Debts />);
         const debtRow = await screen.findByText("Sample Debt");
