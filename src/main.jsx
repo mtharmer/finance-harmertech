@@ -8,8 +8,7 @@ import Navbar from './components/Navbar.jsx'
 import SuperTokens from 'supertokens-web-js';
 import Session from 'supertokens-web-js/recipe/session';
 import EmailPassword from 'supertokens-web-js/recipe/emailpassword'
-// import 'react-toastify/ReactToastify.css'
-import { ToastContainer, toast } from 'react-toastify'
+import { ToastContainer } from 'react-toastify'
 
 SuperTokens.init({
   appInfo: {
@@ -22,8 +21,6 @@ SuperTokens.init({
       EmailPassword.init(),
   ],
 });
-
-// toast.configure();
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
