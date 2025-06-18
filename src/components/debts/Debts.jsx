@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { debtList, createDebt, updateDebt, deleteDebt } from "../../api";
 import DebtRow from "./DebtRow";
 import DebtModal from "./DebtModal";
+import { alert, success } from "../../utility/notifications";
 
 const modifyInitialState = {
   creating: false,
@@ -18,7 +19,7 @@ export default function Debts() {
       const data = await debtList();
       setDebts(data);
     } catch (err) {
-      console.error(err);
+      alert(err);
     }
   }
 
@@ -42,8 +43,9 @@ export default function Debts() {
     try {
       await createDebt(debt);
       getDebts();
+      success('New debt was successfully created!');
     } catch (err) {
-      console.error(err);
+      alert(err);
     }
   }
 
@@ -54,8 +56,9 @@ export default function Debts() {
     try {
       await updateDebt(debt);
       getDebts();
+      success('Debt was successfully updated!');
     } catch (err) {
-      console.error(err);
+      alert(err);
     }
   }
 
@@ -63,8 +66,9 @@ export default function Debts() {
     try {
       await deleteDebt(id);
       getDebts();
+      success('Debt was successfully deleted!')
     } catch (err) {
-      console.error(err);
+      alert(err);
     }
   }
 
