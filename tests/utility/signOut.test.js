@@ -1,10 +1,11 @@
-import logout from '../../src/utility/signOut';
+import signOut from '../../src/utility/signOut';
+import { logout } from '../../src/api';
 
 describe('signOut', () => {
   beforeEach(() => {
-    vi.mock('supertokens-web-js/recipe/session', async () => {
+    vi.mock('../../src/api', async () => {
       return {
-        signOut: vi.fn(async () => true)
+        logout: vi.fn(async () => true)
       }
     });
   });
@@ -15,7 +16,12 @@ describe('signOut', () => {
     delete global.window.location;
     global.window = Object.create(window);
     global.window.location = {href: '/login'};
-    await logout();
+    await signOut();
     expect(window.location.href).toEqual('/');
   });
+  it('removes the token from localStorage', async () => {
+    localStorage.setItem('token', 'Bearer sometoken');
+    await signOut();
+    expect(localStorage.getItem('token')).toBeNull();
+  })
 });

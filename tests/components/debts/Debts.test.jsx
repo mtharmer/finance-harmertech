@@ -5,7 +5,10 @@ import * as api from '../../../src/api';
 import { actWrapper } from '../../helpers';
 import * as notify from '../../../src/utility/notifications';
 
-const debtList = [{id: 1, name: "Sample Debt"}, {id: 2, name: "Another Debt"}];
+const debtList = {data: {data: [
+  {id: 1, attributes: {id: 1, name: "Sample Debt"}},
+  {id: 2, attributes: {id: 2, name: "Another Debt"}}]
+}};
 
 describe('Debts', () => {
   beforeEach(() => {
