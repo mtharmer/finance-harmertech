@@ -1,4 +1,4 @@
-export default async function hasSession() {
+export default function hasSession() {
   if (localStorage.getItem('token')) {
     return true;
   } else {
