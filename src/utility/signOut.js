@@ -1,6 +1,7 @@
-import { signOut } from "supertokens-web-js/recipe/session";
+import { logout } from "../api";
 
-export default async function logout () {
-  await signOut();
+export default async function signOut () {
+  await logout();
+  localStorage.removeItem('token');
   window.location.href = "/";
 }
