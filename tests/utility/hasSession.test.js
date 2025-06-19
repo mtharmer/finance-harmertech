@@ -1,14 +1,14 @@
 import hasSession from "../../src/utility/hasSession";
 
 describe('doesSessionExist', () => {
-  it('returns true if the session exists', async () => {
+  it('returns true if the session exists', () => {
     localStorage.setItem('token', 'Bearer sometoken');
-    const result = await hasSession();
+    const result = hasSession();
     expect(result).toBeTruthy();
   });
-  it('returns false if the session does not exist', async () => {
+  it('returns false if the session does not exist', () => {
     localStorage.removeItem('token');
-    const result = await hasSession();
+    const result = hasSession();
     expect(result).toBeFalsy();
   });
 });
