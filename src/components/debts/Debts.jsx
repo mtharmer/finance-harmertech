@@ -16,8 +16,8 @@ export default function Debts() {
 
   async function getDebts() {
     try {
-      const data = await debtList();
-      setDebts(data);
+      const response = await debtList();
+      setDebts(response.data.data);
     } catch (err) {
       alert(err);
     }
@@ -29,7 +29,7 @@ export default function Debts() {
 
   function handleClickDebt(debt) {
     setModifying({creating: false, editing: true});
-    setSelectedDebt(debt);
+    setSelectedDebt(debt.attributes);
   }
 
   function handleAddDebt() {
@@ -92,7 +92,7 @@ export default function Debts() {
           </button>
         </div>
         {debts.map((debt, index) => (
-          <DebtRow key={index} debt={debt} onClick={() => handleClickDebt(debt)} />
+          <DebtRow key={index} debt={debt.attributes} onClick={() => handleClickDebt(debt)} />
         ))}
       </div>
     </>
