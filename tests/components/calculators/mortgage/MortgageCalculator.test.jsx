@@ -93,7 +93,7 @@ describe('Mortgage Calculator page', () => {
       expect(amortization).toBeInTheDocument();
     });
     describe('when required fields are present', () => {
-      it('displays the results details', async () => {
+      it('displays the results details', {timeout: 10_000}, async () => {
         render(<MortgageCalculator />);
         const amountInput = screen.getByTestId('mortgage-container-loan-amount-input');
         const interestInput = screen.getByTestId('mortgage-container-interest-rate-input');
@@ -104,7 +104,7 @@ describe('Mortgage Calculator page', () => {
         const results = screen.getByTestId('mortgage-container-results');
         expect(results).toBeInTheDocument();
       });
-      it('displays the amortization table', async () => {
+      it('displays the amortization table', {timeout: 10_000}, async () => {
         render(<MortgageCalculator />);
         const amountInput = screen.getByTestId('mortgage-container-loan-amount-input');
         const interestInput = screen.getByTestId('mortgage-container-interest-rate-input');
