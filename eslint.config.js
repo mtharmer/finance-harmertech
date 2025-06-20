@@ -2,6 +2,7 @@ import js from '@eslint/js'
 import globals from 'globals'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
+import eslintSecurity from 'eslint-plugin-security'
 
 export default [
   { ignores: ['dist', 'coverage', 'tests'] },
@@ -19,6 +20,7 @@ export default [
     plugins: {
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
+      'security': eslintSecurity
     },
     rules: {
       ...js.configs.recommended.rules,
