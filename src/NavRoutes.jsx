@@ -5,6 +5,7 @@ import Login from "./components/auth/Login";
 import { Routes, Route, Navigate } from "react-router";
 import Debts from "./components/debts/Debts";
 import hasSession from "./utility/hasSession";
+import MonthlyExpenses from "./components/monthlyExpenses/MonthlyExpenses";
 
 export default function NavRoutes() {
   return (
@@ -14,6 +15,7 @@ export default function NavRoutes() {
       <Route path="/signup" element={<Signup />} />
       <Route path="/login" element={<Login />} />
       <Route path="/debts" element={hasSession() ? <Debts /> : <Navigate to='/'/>} />
+      <Route path="/monthlyexpenses" element={hasSession() ? <MonthlyExpenses /> : <Navigate to='/' />} />
     </Routes>
   );
 }
