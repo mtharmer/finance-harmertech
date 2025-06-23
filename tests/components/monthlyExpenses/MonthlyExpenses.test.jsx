@@ -28,7 +28,7 @@ describe('Monthly Expenses', () => {
 
   describe('primary page', () => {
     beforeEach(() => {
-      vi.mock('../../../src/components/Modal.jsx', () => {
+      vi.mock('../../../src/components/modal/Modal.jsx', () => {
         return {
           default: (props) => <div data-testid="mocked-modal">{props.children}</div>
         }

@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import Modal from "../../src/components/Modal";
+import Modal from "../../src/components/modal/Modal";
 
 describe('Modal', () => {
   it('renders when included', () => {
