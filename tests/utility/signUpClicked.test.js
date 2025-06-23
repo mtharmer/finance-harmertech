@@ -47,5 +47,14 @@ describe('signUp', () => {
         spy.mockReset();
       });
     });
+    describe('when a 422 error', () => {
+      it('alerts with invalid credentials', async () => {
+        signup.mockRejectedValue({status: 422});
+        const spy = vi.spyOn(notify, 'alert').mockImplementation(() => {});
+        await signUpClicked(email, password);
+        expect(spy).toHaveBeenCalledWith('Invalid credentials, please try again!');
+        spy.mockReset();
+      });
+    });
   });
 });
