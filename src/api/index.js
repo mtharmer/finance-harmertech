@@ -75,3 +75,7 @@ export const signup = (user) => {
 export const logout = () => {
   return client.delete('/logout');
 }
+
+export const changePassword = (user) => {
+  return client.put('/signup', user);
+}

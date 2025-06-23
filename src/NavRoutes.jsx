@@ -6,6 +6,7 @@ import { Routes, Route, Navigate } from "react-router";
 import Debts from "./components/debts/Debts";
 import hasSession from "./utility/hasSession";
 import MonthlyExpenses from "./components/monthlyExpenses/MonthlyExpenses";
+import ChangePassword from "./components/auth/ChangePassword";
 
 export default function NavRoutes() {
   return (
@@ -16,6 +17,7 @@ export default function NavRoutes() {
       <Route path="/login" element={<Login />} />
       <Route path="/debts" element={hasSession() ? <Debts /> : <Navigate to='/'/>} />
       <Route path="/monthlyexpenses" element={hasSession() ? <MonthlyExpenses /> : <Navigate to='/' />} />
+      <Route path='/changepassword' element={hasSession() ? <ChangePassword /> : <Navigate to='/' />} />
     </Routes>
   );
 }

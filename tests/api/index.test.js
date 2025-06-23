@@ -166,4 +166,12 @@ describe('api', () => {
       expect(spy).toHaveBeenCalledWith('/signup', creds);
     });
   });
+  describe('changePassword', () => {
+    it('should call on axios.put', async () => {
+      const creds = {email: 'some@example.com', currentPassword: 'somepass', password: 'newpass', passwordConfirmation: 'newpass'}
+      const spy = vi.spyOn(axios, 'put').mockResolvedValue({status: 'success'});
+      await api.changePassword(creds);
+      expect(spy).toHaveBeenCalledWith('/signup', creds);
+    });
+  });
 });
