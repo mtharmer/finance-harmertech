@@ -11,10 +11,10 @@ export default async function passwordChange(email, currentPassword, password, p
         passwordConfirmation: passwordConfirmation
       }
     });
-    localStorage.removeItem('token')
+    localStorage.removeItem('token');
     window.location.href = "/login";
   } catch (error) {
-    if (err.status === 422) {
+    if (error.status === 422) {
       alert('Invalid credentials, please try again!');
     } else {
       alert("Oops! Something went wrong.");

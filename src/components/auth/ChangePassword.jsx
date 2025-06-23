@@ -36,7 +36,7 @@ export default function ChangePassword() {
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your current password"
               required
-              data-testid='password-change-password-input'
+              data-testid='password-change-current-password-input'
             />
           </div>
           <div className="mb-4">
@@ -47,7 +47,7 @@ export default function ChangePassword() {
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your new password"
               required
-              data-testid='password-change-password-input'
+              data-testid='password-change-new-password-input'
             />
           </div>
           <div className="mb-4">
@@ -58,7 +58,7 @@ export default function ChangePassword() {
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Confirm your new password"
               required
-              data-testid='password-change-password-input'
+              data-testid='password-change-confirm-password-input'
             />
           </div>
           <button
