@@ -4,9 +4,9 @@ import hasSession from '../../src/utility/hasSession';
 
 describe('Navbar', () => {
   beforeEach(() => {
-    vi.mock('../../src/utility/hasSession', async () => {
+    vi.mock('../../src/utility/hasSession', () => {
       return {
-        default: vi.fn(async () => false)
+        default: vi.fn(() => false)
       }
     })
   })

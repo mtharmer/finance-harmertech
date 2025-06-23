@@ -1,38 +1,27 @@
 import signOut from "../utility/signOut";
 import doesSessionExist from "../utility/hasSession";
-import { useEffect, useState } from "react";
 
 export default function Navbar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    async function checkSession() {
-      const exists = await doesSessionExist();
-      setIsLoggedIn(exists);
-    }
-    checkSession();
-  }, [])
-
   const navItems = [
     { title: 'Home', ref: '/' },
     { title: 'Calculators', ref: '/calculators' },
   ];
 
+  if (doesSessionExist()) {
+    navItems.push(
+      { title: 'Debts', ref: '/debts' },
+      { title: 'Monthly Expenses', ref: '/monthlyexpenses'}
+    )
+  }
+
   const authItems = [
-    { title: 'Debts', ref: '/debts' },
-    { title: 'Monthly Expenses', ref: '/monthlyexpenses'}
+    { title: 'Change Password', ref: '/changepassword'}
   ]
 
   const nonAuthItems = [
     { title: 'Signup', ref: '/signup' },
     { title: 'Login', ref: '/login' },
   ];
-
-  if (isLoggedIn) {
-    navItems.push(...authItems);
-  } else {
-    navItems.push(...nonAuthItems);
-  }
 
   return (
     <nav className="bg-stone-800 sticky top-0 z-50">
@@ -46,13 +35,36 @@ export default function Navbar() {
               {index < navItems.length - 1 && <span className="text-stone-400 pl-4">|</span>}
             </li>
           ))}
-          {isLoggedIn && (
-            <li>
-              <span className="text-stone-400 pr-4">|</span>
-              <button href="/logout" className="text-white hover:text-stone-300 cursor-pointer" onClick={signOut}>
-                Logout
-              </button>
-            </li>
+        </ul>
+        <ul className="flex space-x-4 pr-4">
+          {(doesSessionExist()) ? (
+            <>
+              {authItems.map((item, index) => (
+                <li key={item.title}>
+                  <a href={item.ref} className="text-white hover:text-stone-300">
+                    {item.title}
+                  </a>
+                  {index < authItems.length - 1 && <span className="text-stone-400 pl-4">|</span>}
+                </li>
+              ))}
+              <li>
+                <span className="text-stone-400 pr-4">|</span>
+                <button href="/logout" className="text-white hover:text-stone-300 cursor-pointer" onClick={signOut}>
+                  Logout
+                </button>
+              </li>
+            </>
+          ) : (
+            <>
+              {nonAuthItems.map((item, index) => (
+                <li key={item.title}>
+                  <a href={item.ref} className="text-white hover:text-stone-300">
+                    {item.title}
+                  </a>
+                  {index < nonAuthItems.length - 1 && <span className="text-stone-400 pl-4">|</span>}
+                </li>
+              ))}
+            </>
           )}
         </ul>
       </div>
