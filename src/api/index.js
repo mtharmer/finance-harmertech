@@ -6,26 +6,31 @@ const client = axios.create({
 
 const unintercepted = client;
 
-client.interceptors.request.use(function (request) {
+export function onRequestFulfilled(request) {
   const token = localStorage.getItem('token');
-  if (token) {
-    request.headers.Authorization = token;
-  }
+  request.headers.Authorization = token;
   return request;
-}, function (error) {
-  return Promise.reject(error);
-});
+}
 
-// Add a response interceptor to handle global errors
-client.interceptors.response.use(function (response) {
+export function onRequestFailed(error) {
+  return Promise.reject(error);
+}
+
+client.interceptors.request.use(onRequestFulfilled, onRequestFailed);
+
+export function onResponseFulfilled(response) {
   return response;
-}, function (error) {
+}
+
+export function onResponseFailed(error) {
   if (error.response && error.response.status === 401) {
     localStorage.removeItem('token');
     window.location.href = '/login'
   }
   return Promise.reject(error);
-});
+}
+
+client.interceptors.response.use(onResponseFulfilled, onResponseFailed);
 
 export const debtList = async () => {
   return await client.get('/debts');

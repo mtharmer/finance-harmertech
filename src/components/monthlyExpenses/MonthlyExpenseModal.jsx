@@ -38,7 +38,7 @@ export default function MonthlyExpenseModal({onClickSave, onClickClose, initialE
         <form>
           <p className="py-2">
             <label>Expense Name: </label>
-            <input className="bg-slate-200 rounded-xl" type="text" name="name" value={expense.name || ''} onChange={handleChange} data-testid='monthly-expense-modal-name-input'/>
+            <input className="bg-slate-200 rounded-xl" type="text" name="name" value={expense.name || ''} onChange={handleChange} data-testid='monthly-expenses-modal-name-input'/>
           </p>
           <p className="py-2">
             <label>Amount: </label>
