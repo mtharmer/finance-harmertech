@@ -8,7 +8,6 @@ export default function DebtModal({onClickSave, onClickClose, initialDebt, onCli
   const [debt, setDebt] = useState(initialDebt)
 
   const titleText = (isEditing) ? "Edit Debt" : "New Debt"
-  const saveButtonText = (isEditing) ? "Update" : "Create"
 
   function handleChange(event) {
     setDebt(prev => {
