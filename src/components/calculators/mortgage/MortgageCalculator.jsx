@@ -39,14 +39,18 @@ export default function MortgageCalculator() {
       <h1 className="text-3xl font-bold text-center mt-10">
         Mortgage Calculator
       </h1>
-      <div className="flex justify-center">
-        <MortgageInputs inputs={inputs} onInputChange={handleInputChange} onRadioChange={handleRadioChange} />
-        {mortgageData && (
-          <section>
-            <MortgageResults results={mortgageData} />
-            {/* <MortgageGraph results={mortgageData} /> */}
-          </section>
-        )}
+      <div className="flex flex-row justify-between mx-16">
+        <div className="flex flex-col">
+          <MortgageInputs inputs={inputs} onInputChange={handleInputChange} onRadioChange={handleRadioChange} />
+        </div>
+        <div className="flex flex-col">
+          {mortgageData && (
+            <section>
+              <MortgageResults results={mortgageData} />
+              {/* <MortgageGraph results={mortgageData} /> */}
+            </section>
+          )}
+        </div>
       </div>
       <MortgageAmortization results={mortgagePayments} />
     </div>
