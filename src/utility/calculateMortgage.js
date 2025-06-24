@@ -3,6 +3,7 @@ export default function calculateMortgage(inputs) {
 
   let mortgageData = {};
   let payments = [];
+  let yearly = [];
 
   if (!loanAmount || !interestRate || !loanTerm) {
     return [null, []];
@@ -48,6 +49,18 @@ export default function calculateMortgage(inputs) {
     }
   }
 
+  for (let index = 0; index < payments.length; index++) {
+    if (index % 12 === 0) {
+      const element = payments[index];
+      yearly.push({
+        year: index / 12,
+        totalPrincipalPaid: element.totalPrincipalPaid,
+        totalInterestPaid: element.totalInterestPaid,
+        balance: element.endBalance
+      });
+    }
+  }
+
   const baseTotalInterest = +(originalPrincipalAndInterest * originalLoanTermInMonths - loanAmount);
   const baseTotalCostOfLoan = +(originalPrincipalAndInterest * originalLoanTermInMonths);
   const totalInterest = totalInterestPaid;
@@ -84,5 +97,5 @@ export default function calculateMortgage(inputs) {
     extra
   };
 
-  return [mortgageData, payments];
+  return [mortgageData, payments, yearly];
 }
