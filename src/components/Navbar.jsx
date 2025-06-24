@@ -24,15 +24,15 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="bg-stone-800 sticky top-0 z-50">
+    <nav className="bg-slate-800 sticky top-0 z-50">
       <div className="mx-auto h-16 flex justify-between items-center pl-4">
         <ul className="flex space-x-4">
           {navItems.map((item, index) => (
             <li key={item.title}>
-              <a href={item.ref} className="text-white hover:text-stone-300">
+              <a href={item.ref} className="text-white hover:text-slate-300">
                 {item.title}
               </a>
-              {index < navItems.length - 1 && <span className="text-stone-400 pl-4">|</span>}
+              {index < navItems.length - 1 && <span className="text-slate-400 pl-4">|</span>}
             </li>
           ))}
         </ul>
@@ -41,15 +41,15 @@ export default function Navbar() {
             <>
               {authItems.map((item, index) => (
                 <li key={item.title}>
-                  <a href={item.ref} className="text-white hover:text-stone-300">
+                  <a href={item.ref} className="text-white hover:text-slate-300">
                     {item.title}
                   </a>
-                  {index < authItems.length - 1 && <span className="text-stone-400 pl-4">|</span>}
+                  {index < authItems.length - 1 && <span className="text-slate-400 pl-4">|</span>}
                 </li>
               ))}
               <li>
-                <span className="text-stone-400 pr-4">|</span>
-                <button href="/logout" className="text-white hover:text-stone-300 cursor-pointer" onClick={signOut}>
+                <span className="text-slate-400 pr-4">|</span>
+                <button href="/logout" className="text-white hover:text-slate-300 cursor-pointer" onClick={signOut}>
                   Logout
                 </button>
               </li>
@@ -58,10 +58,10 @@ export default function Navbar() {
             <>
               {nonAuthItems.map((item, index) => (
                 <li key={item.title}>
-                  <a href={item.ref} className="text-white hover:text-stone-300">
+                  <a href={item.ref} className="text-white hover:text-slate-300">
                     {item.title}
                   </a>
-                  {index < nonAuthItems.length - 1 && <span className="text-stone-400 pl-4">|</span>}
+                  {index < nonAuthItems.length - 1 && <span className="text-slate-400 pl-4">|</span>}
                 </li>
               ))}
             </>
