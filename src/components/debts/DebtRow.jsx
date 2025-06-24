@@ -14,10 +14,15 @@ export default function DebtRow({debt, onClick}) {
         <p>Current Balance: {formatCurrency(debt.currentBalance)}</p>
       </div>
       <div className="flex flex-col justify-center w-xl text-left mx-2">
-        <p>APR: {formatPercent(debt.apr)}</p>
-        <p>Term: {debt.originalTerm}</p>
+        <p>Original Interest: {formatCurrency(debt.originalInterest)}</p>
+        <p>Remaining Interest: {formatCurrency(debt.remainingInterest)}</p>
       </div>
       <div className="flex flex-col justify-center w-xl text-left mx-2">
+        <p>Term: {debt.originalTerm}</p>
+        <p>Remaining: {debt.remainingTerm}</p>
+      </div>
+      <div className="flex flex-col justify-center w-xl text-left mx-2">
+        <p>APR: {formatPercent(debt.apr)}</p>
         <p>Minimum Payment: {formatCurrency(debt.minimumPayment)}</p>
       </div>
     </div>
