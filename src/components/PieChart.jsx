@@ -2,7 +2,7 @@ import Chart from 'chart.js/auto';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { useEffect, useRef } from "react";
 
-export default function PieChart({id, labels, dataLabel, data, colors = null}) {
+export default function PieChart({labels, dataLabel, data, colors = null}) {
   Chart.register(ChartDataLabels);
   const chartRef = useRef(null);
   const chartInstance = useRef(null);
