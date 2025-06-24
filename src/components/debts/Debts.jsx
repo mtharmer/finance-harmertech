@@ -86,7 +86,7 @@ export default function Debts() {
       {modifying.creating && <DebtModal onClickSave={handleSaveNewDebt} onClickClose={handleClose} initialDebt={{}} /> }
       <div className="mx-2">
         <h1 className="text-5xl font-bold text-center my-10" data-testid="debts-header">Debts</h1>
-        <DebtSummary debts={debts} />
+        {debts.length && debts.length > 0 && <DebtSummary debts={debts} />}
         <div className="flex flex-col justify-center content-center rounded-2xl text-center my-4 mx-16">
           <button 
             className="border-slate-800 border-2 rounded-2xl cursor-pointer bg-slate-100 text-slate-700 h-12" 
