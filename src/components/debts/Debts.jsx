@@ -3,6 +3,7 @@ import { debtList, createDebt, updateDebt, deleteDebt } from "../../api";
 import DebtRow from "./DebtRow";
 import DebtModal from "./DebtModal";
 import { alert, success } from "../../utility/notifications";
+import DebtSummary from "./DebtSummary";
 
 const modifyInitialState = {
   creating: false,
@@ -37,9 +38,6 @@ export default function Debts() {
   }
 
   async function handleSaveNewDebt(debt) {
-    // Error checking for fields
-
-    // Add promise chaining for better handling
     try {
       await createDebt(debt);
       getDebts();
@@ -50,11 +48,17 @@ export default function Debts() {
   }
 
   async function handleUpdateDebt(debt) {
-    // Error checking for fields
-
-    // Add promise chaining for better handling
+    const debtCopy = {
+      id: debt.id,
+      name: debt.name,
+      originalBalance: debt.originalBalance,
+      currentBalance: debt.currentBalance,
+      apr: debt.apr,
+      originalTerm: debt.originalTerm,
+      minimumPayment: debt.minimumPayment
+    }
     try {
-      await updateDebt(debt);
+      await updateDebt(debtCopy);
       getDebts();
       success('Debt was successfully updated!');
     } catch (err) {
@@ -81,7 +85,8 @@ export default function Debts() {
       {modifying.editing && <DebtModal onClickSave={handleUpdateDebt} onClickClose={handleClose} initialDebt={selectedDebt} isEditing onClickDelete={handleDelete} /> }
       {modifying.creating && <DebtModal onClickSave={handleSaveNewDebt} onClickClose={handleClose} initialDebt={{}} /> }
       <div className="mx-2">
-        <h1 className="text-3xl font-bold text-center my-10" data-testid="debts-header">Debts</h1>
+        <h1 className="text-5xl font-bold text-center my-10" data-testid="debts-header">Debts</h1>
+        {debts.length && debts.length > 0 && <DebtSummary debts={debts} />}
         <div className="flex flex-col justify-center content-center rounded-2xl text-center my-4 mx-16">
           <button 
             className="border-slate-800 border-2 rounded-2xl cursor-pointer bg-slate-100 text-slate-700 h-12" 

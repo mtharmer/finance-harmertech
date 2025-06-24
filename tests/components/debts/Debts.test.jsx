@@ -33,6 +33,12 @@ describe('Debts', () => {
           default: (props) => <div data-testid="mocked-modal">{props.children}</div>
         }
       });
+
+      vi.mock('../../../src/components/PieChart.jsx', () => {
+        return {
+          default: () => <div data-testid='mocked-piechart'></div>
+        }
+      })
     });
     it('renders the container page', async () => {
       render(<Debts />);
