@@ -1,6 +1,28 @@
 import { formatCurrency } from "../../../utility/formatter";
+import AmortizationChart from "../../AmortizationChart";
+import PieChart from "../../PieChart";
 
-export default function MortgageResults({ results }) {
+export default function MortgageResults({ results, yearly }) {
+  const pieLabels = ['Principal', 'Interest', 'Taxes, Insurance & PMI'];
+
+  const pieData = [
+    results.loanAmount,
+    results.totalInterest,
+    results.totalEscrow || 0
+  ];
+  const pieLabel = 'Cost';
+  // const dataColors = [colors.blue[400], colors.blue[800]];
+
+  console.log(yearly);
+
+  const amortizationLabels = yearly.map((year) => year.year);
+  const amortizationData = [
+    {label: 'Balance', data: yearly.map((year) => year.balance), type: 'line'},
+    {label: 'Principal Paid', data: yearly.map((year) => year.totalPrincipalPaid)},
+    {label: 'Interest Paid', data: yearly.map((year) => year.totalInterestPaid)}
+  ];
+  const amortizationDataLabel = 'Balance';
+
   return (
     <div data-testid='mortgage-container-results'>
       <h1 className="text-2xl font-bold text-center mt-10">
@@ -14,6 +36,14 @@ export default function MortgageResults({ results }) {
           <p>By paying an extra <u>{formatCurrency(results.extra)}</u> monthly, you will save <u>{formatCurrency(results.interestSaved)}</u> in interest,</p>
           <p>and will pay off your loan <u>{results.loanTerm*12 - results.numberOfPayments}</u> months early.</p>
         </>)}
+      </div>
+      <div className="flex flex-row">
+        <div className="flex flex-col max-w-64">
+          <PieChart labels={pieLabels} data={pieData} dataLabel={pieLabel} />
+        </div>
+        <div className="flex flex-col w-full">
+          <AmortizationChart labels={amortizationLabels} data={amortizationData} dataLabel={amortizationDataLabel} />
+        </div>
       </div>
     </div>
   );

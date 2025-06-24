@@ -20,7 +20,6 @@ export default function MonthlyExpensesSummary({expenses}) {
   }
 
   const labels = [...new Set(expenseList.map((expense) => expense.expenseType))];
-  // const labels = [...labelsSet];
 
   let data = [];
   for (let index = 0; index < labels.length; index++) {
