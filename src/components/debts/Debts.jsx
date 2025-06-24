@@ -15,10 +15,22 @@ export default function Debts() {
   const [modifying, setModifying] = useState(modifyInitialState);
   const [selectedDebt, setSelectedDebt] = useState({});
 
+  function sortDebts(items) {
+    return items.sort((a, b) => {
+      if (a.attributes.name < b.attributes.name) {
+        return -1; // a comes before b
+      }
+      if (a.attributes.name > b.attributes.name) {
+          return 1;  // b comes before a
+      }
+      return 0; 
+    })
+  }
+
   async function getDebts() {
     try {
       const response = await debtList();
-      setDebts(response.data.data);
+      setDebts(sortDebts(response.data.data));
     } catch (err) {
       alert(err);
     }
