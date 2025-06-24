@@ -3,6 +3,7 @@ import { monthlyExpenseList, createMonthlyExpense, updateMonthlyExpense, deleteM
 import { alert, success } from "../../utility/notifications";
 import MonthlyExpenseRow from "./MonthlyExpenseRow";
 import MonthlyExpenseModal from "./MonthlyExpenseModal";
+import MonthlyExpensesSummary from "./MonthlyExpensesSummary";
 
 const modifyInitialState = {
   creating: false,
@@ -81,6 +82,7 @@ export default function MonthlyExpenses() {
       {modifying.creating && <MonthlyExpenseModal onClickSave={handleSaveNewExpense} onClickClose={handleClose} initialExpense={{}} /> }
       <div className="mx-2">
         <h1 className="text-3xl font-bold text-center my-10" data-testid="monthly-expenses-header">Monthly Expenses</h1>
+        {monthlyExpenses && monthlyExpenses.length > 0 && <MonthlyExpensesSummary expenses={monthlyExpenses} /> }
         <div className="flex flex-col justify-center content-center rounded-2xl text-center my-4 mx-16">
           <button 
             className="border-slate-800 border-2 rounded-2xl cursor-pointer bg-slate-100 text-slate-700 h-12" 
@@ -90,7 +92,7 @@ export default function MonthlyExpenses() {
             Add New Monthly Expense +
           </button>
         </div>
-        {monthlyExpenses.map((expense, index) => (
+        {monthlyExpenses.sort((a, b) => a.attributes.dueDay - b.attributes.dueDay).map((expense, index) => (
           <MonthlyExpenseRow key={index} expense={expense.attributes} onClick={() => handleClickExpense(expense)} />
         ))}
       </div>

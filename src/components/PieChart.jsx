@@ -2,7 +2,7 @@ import Chart from 'chart.js/auto';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { useEffect, useRef } from "react";
 
-export default function PieChart({labels, dataLabel, data, colors}) {
+export default function PieChart({id, labels, dataLabel, data, colors = null}) {
   Chart.register(ChartDataLabels);
   const chartRef = useRef(null);
   const chartInstance = useRef(null);
@@ -11,10 +11,13 @@ export default function PieChart({labels, dataLabel, data, colors}) {
     labels: labels,
     datasets: [{
       label: dataLabel,
-      data: data,
-      backgroundColor: colors
+      data: data
     }]
   };
+
+  if (colors) {
+    chartData.datasets[0].backgroundColor = colors;
+  }
 
   const options = {
     tooltips: {
@@ -41,11 +44,13 @@ export default function PieChart({labels, dataLabel, data, colors}) {
       chartInstance.current.destroy();
     }
     const ctx = chartRef.current.getContext('2d');
-    chartInstance.current = new Chart(ctx, {
-      type: 'pie',
-      data: chartData,
-      options: options,
-    });
+    if (ctx) {
+      chartInstance.current = new Chart(ctx, {
+        type: 'pie',
+        data: chartData,
+        options: options,
+      });
+    }
     return () => {
       if (chartInstance.current) {
         chartInstance.current.destroy();

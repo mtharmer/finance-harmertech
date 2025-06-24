@@ -3,7 +3,7 @@ import { formatCurrency } from "../../utility/formatter";
 export default function MonthlyExpenseRow({expense, onClick}) {
   return (
     <div 
-      className="w-full h-24 bg-slate-100 rounded-2xl border-2 border-slate-800 my-2 cursor-pointer flex flex-row justify-between"
+      className="w-full h-16 bg-slate-100 rounded-2xl border-2 border-slate-800 my-2 cursor-pointer flex flex-row justify-between"
       onClick={() => onClick(expense.id)}
     >
       <div className="flex flex-col justify-center w-xl text-left mx-2">
