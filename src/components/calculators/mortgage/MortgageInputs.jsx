@@ -2,7 +2,7 @@ import NumberInput from '../NumberInput';
 
 export default function MortgageInputs({inputs, onInputChange, onRadioChange}) {
   return (
-    <form className="space-y-4 mr-16 pr-16" data-testid='mortgage-container-inputs'>
+    <form className="space-y-4" data-testid='mortgage-container-inputs'>
       <NumberInput label="Loan Amount" name="loanAmount" value={inputs.loanAmount} onChange={onInputChange} data-testid='mortgage-container-loan-amount-input' />
       <NumberInput label="Interest Rate (%)" name="interestRate" value={inputs.interestRate} onChange={onInputChange} data-testid='mortgage-container-interest-rate-input' />
       <NumberInput label="Loan Term (years)" name="loanTerm" value={inputs.loanTerm} onChange={onInputChange} data-testid='mortgage-container-loan-term-input' />

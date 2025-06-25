@@ -12,8 +12,6 @@ export default function AmortizationChart({labels, data, dataLabel, colors}) {
     datasets: data
   };
 
-  console.log(chartData);
-
   if (colors) {
     chartData.datasets[0].backgroundColor = colors;
   }

@@ -13,8 +13,6 @@ export default function MortgageResults({ results, yearly }) {
   const pieLabel = 'Cost';
   // const dataColors = [colors.blue[400], colors.blue[800]];
 
-  console.log(yearly);
-
   const amortizationLabels = yearly.map((year) => year.year);
   const amortizationData = [
     {label: 'Balance', data: yearly.map((year) => year.balance), type: 'line'},

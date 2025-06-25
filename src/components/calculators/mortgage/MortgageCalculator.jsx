@@ -39,11 +39,11 @@ export default function MortgageCalculator() {
       <h1 className="text-3xl font-bold text-center mt-10">
         Mortgage Calculator
       </h1>
-      <div className="flex flex-row justify-between mx-8">
+      <div className="flex flex-row justify-start mx-8">
         <div className="flex flex-col">
           <MortgageInputs inputs={inputs} onInputChange={handleInputChange} onRadioChange={handleRadioChange} />
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col ml-24">
           {mortgageData && (
             <section>
               <MortgageResults results={mortgageData} yearly={yearlyData} />
