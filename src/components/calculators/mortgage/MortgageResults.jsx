@@ -19,7 +19,6 @@ export default function MortgageResults({ results, yearly }) {
     {label: 'Principal Paid', data: yearly.map((year) => year.totalPrincipalPaid)},
     {label: 'Interest Paid', data: yearly.map((year) => year.totalInterestPaid)}
   ];
-  const amortizationDataLabel = 'Balance';
 
   return (
     <div data-testid='mortgage-container-results'>
@@ -40,7 +39,7 @@ export default function MortgageResults({ results, yearly }) {
           <PieChart labels={pieLabels} data={pieData} dataLabel={pieLabel} />
         </div>
         <div className="flex flex-col w-full">
-          <AmortizationChart labels={amortizationLabels} data={amortizationData} dataLabel={amortizationDataLabel} />
+          <AmortizationChart labels={amortizationLabels} data={amortizationData} />
         </div>
       </div>
     </div>

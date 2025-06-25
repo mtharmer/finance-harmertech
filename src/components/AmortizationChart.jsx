@@ -1,39 +1,43 @@
 import Chart from 'chart.js/auto';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 
-export default function AmortizationChart({labels, data, dataLabel, colors}) {
+export default function AmortizationChart({labels, data, colors}) {
   Chart.register(ChartDataLabels);
   const chartRef = useRef(null);
   const chartInstance = useRef(null);
 
-  const chartData = {
-    labels: labels,
-    datasets: data
-  };
+  const chartData = useMemo(() => {
+    return {
+      labels: labels,
+      datasets: data
+    }
+  }, [data, labels]);
 
   if (colors) {
     chartData.datasets[0].backgroundColor = colors;
   }
 
-  const options = {
-    tooltips: {
-      enabled: false
-    },
-    plugins: {
-      datalabels: {
-        formatter: () => ''
-      }
-    },
-    scales: {
-      x: {
-        stacked: true,
+  const options = useMemo(() => {
+    return {
+      tooltips: {
+        enabled: false
       },
-      y: {
-        stacked: true
+      plugins: {
+        datalabels: {
+          formatter: () => ''
+        }
+      },
+      scales: {
+        x: {
+          stacked: true,
+        },
+        y: {
+          stacked: true
+        }
       }
     }
-  };
+  }, []);
 
   useEffect(() => {
     if (chartInstance.current) {

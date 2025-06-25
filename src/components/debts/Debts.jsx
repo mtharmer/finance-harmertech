@@ -38,7 +38,7 @@ export default function Debts() {
 
   useEffect(() => {
     getDebts();
-  }, []);
+  });
 
   function handleClickDebt(debt) {
     setModifying({creating: false, editing: true});

@@ -1,43 +1,47 @@
 import Chart from 'chart.js/auto';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 
 export default function PieChart({labels, dataLabel, data, colors = null}) {
   Chart.register(ChartDataLabels);
   const chartRef = useRef(null);
   const chartInstance = useRef(null);
 
-  const chartData = {
-    labels: labels,
-    datasets: [{
-      label: dataLabel,
-      data: data
-    }]
-  };
+  const chartData = useMemo(() => {
+    return {
+      labels: labels,
+      datasets: [{
+        label: dataLabel,
+        data: data
+      }]
+    }
+  }, [labels, data, dataLabel]);
 
   if (colors) {
     chartData.datasets[0].backgroundColor = colors;
   }
 
-  const options = {
-    tooltips: {
-      enabled: false
-    },
-    plugins: {
-      datalabels: {
-        formatter: (value, categories) => {
-          let sum = 0;
-          let dataArr = categories.chart.data.datasets[0].data;
-          dataArr.map(data => {
-            sum += data;
-          });
-          let percentage = (value*100 / sum).toFixed(2)+"%";
-          return percentage;
-        },
-        color: '#fff',
+  const options = useMemo(() => {
+    return {
+      tooltips: {
+        enabled: false
+      },
+      plugins: {
+        datalabels: {
+          formatter: (value, categories) => {
+            let sum = 0;
+            let dataArr = categories.chart.data.datasets[0].data;
+            dataArr.map(data => {
+              sum += data;
+            });
+            let percentage = (value*100 / sum).toFixed(2)+"%";
+            return percentage;
+          },
+          color: '#fff',
+        }
       }
     }
-  };
+  }, []);
 
   useEffect(() => {
     if (chartInstance.current) {
