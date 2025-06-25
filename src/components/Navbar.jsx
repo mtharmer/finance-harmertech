@@ -10,8 +10,9 @@ export default function Navbar() {
   if (doesSessionExist()) {
     navItems.push(
       { title: 'Debts', ref: '/debts' },
-      { title: 'Monthly Expenses', ref: '/monthlyexpenses'}
-    )
+      { title: 'Monthly Expenses', ref: '/monthlyexpenses'},
+      { title: 'Mortgage', ref: '/mortgage' }
+    );
   }
 
   const authItems = [
