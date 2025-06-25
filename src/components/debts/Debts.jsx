@@ -16,15 +16,7 @@ export default function Debts() {
   const [selectedDebt, setSelectedDebt] = useState({});
 
   function sortDebts(items) {
-    return items.sort((a, b) => {
-      if (a.attributes.name < b.attributes.name) {
-        return -1; // a comes before b
-      }
-      if (a.attributes.name > b.attributes.name) {
-          return 1;  // b comes before a
-      }
-      return 0; 
-    })
+    return items.sort((a, b) => a.attributes.name.localeCompare(b.attributes.name));
   }
 
   async function getDebts() {
@@ -38,7 +30,7 @@ export default function Debts() {
 
   useEffect(() => {
     getDebts();
-  });
+  }, []);
 
   function handleClickDebt(debt) {
     setModifying({creating: false, editing: true});
