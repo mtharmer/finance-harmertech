@@ -2,7 +2,7 @@ import Chart from 'chart.js/auto';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { useEffect, useMemo, useRef } from "react";
 
-export default function PieChart({labels, dataLabel, data, colors = null}) {
+export default function AmortizationChart({labels, data, colors}) {
   Chart.register(ChartDataLabels);
   const chartRef = useRef(null);
   const chartInstance = useRef(null);
@@ -10,12 +10,9 @@ export default function PieChart({labels, dataLabel, data, colors = null}) {
   const chartData = useMemo(() => {
     return {
       labels: labels,
-      datasets: [{
-        label: dataLabel,
-        data: data
-      }]
+      datasets: data
     }
-  }, [labels, data, dataLabel]);
+  }, [data, labels]);
 
   if (colors) {
     chartData.datasets[0].backgroundColor = colors;
@@ -28,16 +25,15 @@ export default function PieChart({labels, dataLabel, data, colors = null}) {
       },
       plugins: {
         datalabels: {
-          formatter: (value, categories) => {
-            let sum = 0;
-            let dataArr = categories.chart.data.datasets[0].data;
-            dataArr.map(data => {
-              sum += data;
-            });
-            let percentage = (value*100 / sum).toFixed(2)+"%";
-            return percentage;
-          },
-          color: '#fff',
+          formatter: () => ''
+        }
+      },
+      scales: {
+        x: {
+          stacked: true,
+        },
+        y: {
+          stacked: true
         }
       }
     }
@@ -50,7 +46,7 @@ export default function PieChart({labels, dataLabel, data, colors = null}) {
     const ctx = chartRef.current.getContext('2d');
     if (ctx) {
       chartInstance.current = new Chart(ctx, {
-        type: 'pie',
+        type: 'bar',
         data: chartData,
         options: options,
       });
@@ -61,8 +57,7 @@ export default function PieChart({labels, dataLabel, data, colors = null}) {
       }
     }
   }, [chartData, options]);
-
   return (
     <canvas ref={chartRef}></canvas>
-  );
+  )
 }

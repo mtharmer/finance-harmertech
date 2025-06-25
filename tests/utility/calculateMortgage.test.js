@@ -100,18 +100,30 @@ describe('calculateMortgage', () => {
       expect(parseFloat(lastResult.totalInterestPaid.toFixed(2))).toBe(382633.47);
       expect(parseFloat(lastResult.totalPaid.toFixed(2))).toBe(682633.47);
       expect(parseFloat(lastResult.percentPaid.toFixed(2))).toBe(100);
-
-      // month: numberOfPayments,
-      // principal: +principalForThisMonth,
-      // interest: +interestForThisMonth,
-      // startBalance: +startBalance,
-      // endBalance: +balance,
-      // totalPayment: +totalMonthlyPayment,
-      // totalPrincipalPaid: +totalPrincipalPaid,
-      // totalInterestPaid: +totalInterestPaid,
-      // totalPaid: +(totalPrincipalPaid + totalInterestPaid),
-      // percentPaid: +(totalPrincipalPaid / loanAmount * 100),
     });
+    it('returns the expected yearly data', () => {
+      const inputs = {
+        loanAmount: 300000,
+        interestRate: 6.5,
+        loanTerm: 30,
+        propertyTax: 200,
+        homeownersInsurance: 80,
+        pmi: 75
+      }
+      const [_, __, yearly] = calculateMortgage(inputs);
+      expect(yearly.length).toBe(30);
+      
+      const midResult = yearly[14];
+      expect(midResult.year).toBe(15);
+      expect(parseFloat(midResult.balance.toFixed(2))).toBe(217677.42);
+      expect(parseFloat(midResult.totalPrincipalPaid.toFixed(2))).toBe(82322.58);
+      expect(parseFloat(midResult.totalInterestPaid.toFixed(2))).toBe(258994.16);
+
+      const lastResult = yearly[29];
+      expect(parseFloat(lastResult.balance.toFixed(2))).toBe(0);
+      expect(parseFloat(lastResult.totalPrincipalPaid.toFixed(2))).toBe(300000);
+      expect(parseFloat(lastResult.totalInterestPaid.toFixed(2))).toBe(382633.47);
+    })
   });
   describe('with extra payments', () => {
     it('calculates the expected results', () => {
@@ -185,6 +197,32 @@ describe('calculateMortgage', () => {
       expect(parseFloat(lastResult.totalInterestPaid.toFixed(2))).toBe(279184.67);
       expect(parseFloat(lastResult.totalPaid.toFixed(2))).toBe(579184.67);
       expect(parseFloat(lastResult.percentPaid.toFixed(2))).toBe(100);
+    });
+    it('returns the expected yearly data', () => {
+      const inputs = {
+        loanAmount: 300000,
+        interestRate: 6.5,
+        loanTerm: 30,
+        propertyTax: 200,
+        homeownersInsurance: 80,
+        pmi: 75,
+        addExtraPayment: true,
+        extraPayment: 200
+      }
+      const [_, __, yearly] = calculateMortgage(inputs);
+      expect(yearly.length).toBe(24);
+
+      const midResult = yearly[12];
+      expect(midResult.year).toBe(13);
+      expect(parseFloat(midResult.balance.toFixed(2))).toBe(184938.46);
+      expect(parseFloat(midResult.totalPrincipalPaid.toFixed(2))).toBe(115061.54);
+      expect(parseFloat(midResult.totalInterestPaid.toFixed(2))).toBe(211946.29);
+
+      const lastResult = yearly[23];
+      expect(lastResult.year).toBe(24);
+      expect(parseFloat(lastResult.totalPrincipalPaid.toFixed(2))).toBe(300000);
+      expect(parseFloat(lastResult.totalInterestPaid.toFixed(2))).toBe(279184.67)
+      expect(lastResult.balance).toBe(0);
     });
   });
 });

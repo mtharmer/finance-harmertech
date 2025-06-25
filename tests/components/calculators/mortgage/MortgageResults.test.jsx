@@ -12,7 +12,8 @@ describe('MortgageResults component', () => {
       totalPaid: 500000,
       extra: 0
     };
-    render(<MortgageResults results={results} />);
+    const yearly = [{year: 1, balance: 200000, principal: 5000, interest: 20000}];
+    render(<MortgageResults results={results} yearly={yearly} />);
     const container = screen.getByTestId('mortgage-container-results');
     expect(container).toBeInTheDocument();
   });
@@ -27,7 +28,8 @@ describe('MortgageResults component', () => {
       totalPaid: 500000,
       extra: 0
     };
-    render(<MortgageResults results={results} />);
+    const yearly = [{year: 1, balance: 200000, principal: 5000, interest: 20000}];
+    render(<MortgageResults results={results} yearly={yearly} />);
     const line1 = screen.getByText(/with a monthly payment of/i);
     const line2 = screen.getByText(/Your total loan cost will be/i);
     const line3 = screen.getByText(/Your total paid over/i);
@@ -51,7 +53,8 @@ describe('MortgageResults component', () => {
       extra: 500,
       interestSaved: 100000
     };
-    render(<MortgageResults results={results} />);
+    const yearly = [{year: 1, balance: 200000, principal: 5000, interest: 20000}];
+    render(<MortgageResults results={results} yearly={yearly} />);
     const line1 = screen.getByText(/with a monthly payment of/i);
     const line2 = screen.getByText(/Your total loan cost will be/i);
     const line3 = screen.getByText(/Your total paid over/i);
