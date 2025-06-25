@@ -49,11 +49,11 @@ export default function calculateMortgage(inputs) {
     }
   }
 
-  for (let index = 0; index < payments.length; index++) {
-    if (index % 12 === 0) {
-      const element = payments[index];
+  for (let index = 1; index <= payments.length; index++) {
+    if (index % 12 === 0 || index === payments.length) {
+      const element = payments[index-1];
       yearly.push({
-        year: index / 12,
+        year: Math.ceil(index / 12),
         totalPrincipalPaid: element.totalPrincipalPaid,
         totalInterestPaid: element.totalInterestPaid,
         balance: element.endBalance
