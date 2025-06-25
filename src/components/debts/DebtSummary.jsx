@@ -36,11 +36,11 @@ export default function DebtSummary({debts}) {
 
   const principalLabels = ['Principal Paid', 'Remaining Principal'];
   const principalDataLabel = 'Principal';
-  const principalData = [summaryData.principalPaid, summaryData.originalBalance];
+  const principalData = [summaryData.principalPaid, summaryData.remainingBalance];
 
   const paidLabels = ['Total Principal', 'Total Interest'];
   const paidDataLabel = 'Principal & Interest';
-  const paidData = [summaryData.originalBalance, summaryData.originalInterest];
+  const paidData = [summaryData.originalBalance, summaryData.remainingInterest];
 
   const interestLabels = ['Interest Paid', 'Remaining Interest'];
   const interestDataLabel = 'Interest';
