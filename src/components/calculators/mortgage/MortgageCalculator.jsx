@@ -1,8 +1,8 @@
-import MortgageInputs from "./MortgageInputs";
-import MortgageAmortization from "./MortgageAmortization";
+import MortgageCalculatorInputs from "./MortgageCalculatorInputs";
+import MortgageCalculatorAmortization from "./MortgageCalculatorAmortization";
 import calculateMortgage from "../../../utility/calculateMortgage";
 import { useState } from "react";
-import MortgageResults from "./MortgageResults";
+import MortgageCalculatorResults from "./MortgageCalculatorResults";
 
 const initialInputs = {
   loanAmount: null,
@@ -41,17 +41,17 @@ export default function MortgageCalculator() {
       </h1>
       <div className="flex flex-row justify-start mx-8">
         <div className="flex flex-col">
-          <MortgageInputs inputs={inputs} onInputChange={handleInputChange} onRadioChange={handleRadioChange} />
+          <MortgageCalculatorInputs inputs={inputs} onInputChange={handleInputChange} onRadioChange={handleRadioChange} />
         </div>
         <div className="flex flex-col ml-24">
           {mortgageData && (
             <section>
-              <MortgageResults results={mortgageData} yearly={yearlyData} />
+              <MortgageCalculatorResults results={mortgageData} yearly={yearlyData} />
             </section>
           )}
         </div>
       </div>
-      <MortgageAmortization results={mortgagePayments} />
+      <MortgageCalculatorAmortization results={mortgagePayments} />
     </div>
   );
 }

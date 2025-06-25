@@ -1,10 +1,10 @@
-import MortgageAmortization from "../../../../src/components/calculators/mortgage/MortgageAmortization";
+import MortgageCalculatorAmortization from "../../../../src/components/calculators/mortgage/MortgageCalculatorAmortization";
 import { render, screen } from "@testing-library/react";
 import calculateMortgage from "../../../../src/utility/calculateMortgage";
 
-describe('MortgageAmortization component', () => {
+describe('MortgageCalculatorAmortization component', () => {
   it('renders a message when there are no results', () => {
-    render(<MortgageAmortization results={[]} />);
+    render(<MortgageCalculatorAmortization results={[]} />);
     const table = screen.queryByTestId('mortgage-container-amortization-table');
     const message = screen.getByText(/No results to display./i);
     expect(table).not.toBeInTheDocument();
@@ -23,7 +23,7 @@ describe('MortgageAmortization component', () => {
         totalPrincipalPaid: 100,
         percentPaid: 0.1
       }
-      render(<MortgageAmortization results={[data]} />);
+      render(<MortgageCalculatorAmortization results={[data]} />);
       const table = screen.getByTestId('mortgage-container-amortization-table');
       const message = screen.queryByText(/No results to display./i);
       expect(table).toBeInTheDocument();
@@ -31,7 +31,7 @@ describe('MortgageAmortization component', () => {
     });
     it('renders the expected table headers', () => {
       const [_, amortizationData] = calculateMortgage({loanAmount: 300000, interestRate: 6.5, loanTerm: 30});
-      render(<MortgageAmortization results={amortizationData} />);
+      render(<MortgageCalculatorAmortization results={amortizationData} />);
       const header = screen.getByTestId('mortgage-container-amortization-table-header');
       expect(header).toHaveTextContent(/payment #/i);
       expect(header).toHaveTextContent(/start balance/i);
@@ -44,7 +44,7 @@ describe('MortgageAmortization component', () => {
     });
     it('renders the expected number of rows', () => {
       const [_, amortizationData] = calculateMortgage({loanAmount: 300000, interestRate: 6.5, loanTerm: 30});
-      render(<MortgageAmortization results={amortizationData} />);
+      render(<MortgageCalculatorAmortization results={amortizationData} />);
       const rows = screen.getAllByRole('row');
       expect(rows.length).toBe(361); // Add 1 for the header row
     });

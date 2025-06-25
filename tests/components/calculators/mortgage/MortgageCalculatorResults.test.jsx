@@ -1,7 +1,7 @@
-import MortgageResults from "../../../../src/components/calculators/mortgage/MortgageResults";
+import MortgageCalculatorResults from "../../../../src/components/calculators/mortgage/MortgageCalculatorResults";
 import { render, screen } from "@testing-library/react";
 
-describe('MortgageResults component', () => {
+describe('MortgageCalculatorResults component', () => {
   it('displays the container', () => {
     const results = {
       numberOfPayments: 360,
@@ -13,7 +13,7 @@ describe('MortgageResults component', () => {
       extra: 0
     };
     const yearly = [{year: 1, balance: 200000, principal: 5000, interest: 20000}];
-    render(<MortgageResults results={results} yearly={yearly} />);
+    render(<MortgageCalculatorResults results={results} yearly={yearly} />);
     const container = screen.getByTestId('mortgage-container-results');
     expect(container).toBeInTheDocument();
   });
@@ -29,7 +29,7 @@ describe('MortgageResults component', () => {
       extra: 0
     };
     const yearly = [{year: 1, balance: 200000, principal: 5000, interest: 20000}];
-    render(<MortgageResults results={results} yearly={yearly} />);
+    render(<MortgageCalculatorResults results={results} yearly={yearly} />);
     const line1 = screen.getByText(/with a monthly payment of/i);
     const line2 = screen.getByText(/Your total loan cost will be/i);
     const line3 = screen.getByText(/Your total paid over/i);
@@ -54,7 +54,7 @@ describe('MortgageResults component', () => {
       interestSaved: 100000
     };
     const yearly = [{year: 1, balance: 200000, principal: 5000, interest: 20000}];
-    render(<MortgageResults results={results} yearly={yearly} />);
+    render(<MortgageCalculatorResults results={results} yearly={yearly} />);
     const line1 = screen.getByText(/with a monthly payment of/i);
     const line2 = screen.getByText(/Your total loan cost will be/i);
     const line3 = screen.getByText(/Your total paid over/i);

@@ -2,7 +2,7 @@ import { formatCurrency } from "../../../utility/formatter";
 import AmortizationChart from "../../AmortizationChart";
 import PieChart from "../../PieChart";
 
-export default function MortgageResults({ results, yearly }) {
+export default function MortgageCalculatorResults({ results, yearly }) {
   const pieLabels = ['Principal', 'Interest', 'Taxes, Insurance & PMI'];
 
   const pieData = [
