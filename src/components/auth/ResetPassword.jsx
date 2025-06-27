@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { resetPassword } from '../../api';
+import { alert } from '../../utility/notifications';
 
 export default function ResetPassword() {
   const token = new URLSearchParams(window.location.search).get('reset_password_token');
@@ -33,9 +34,9 @@ export default function ResetPassword() {
           required
           className="border border-gray-300 rounded p-2 w-full"
         />
-        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">Reset Password</button>
+        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded" data-testid='reset-password-submit-button'>Reset Password</button>
         </> ) : 
-        <button type="button " className="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer" onClick={goToLogin}>Go to Login</button>
+        <button type="button " className="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer" data-testid='reset-password-login-button' onClick={goToLogin}>Go to Login</button>
         }
       </form>
     </div>

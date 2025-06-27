@@ -7,12 +7,8 @@ export default function RequestPasswordReset() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    try {
-      await requestPasswordReset(email);
-      setMessage('If that email address is registered, you will receive a password reset link shortly.');
-    } catch (err) {
-      alert(err);
-    }
+    requestPasswordReset(email);
+    setMessage('If that email address is registered, you will receive a password reset link shortly.');
   }
 
   return (
