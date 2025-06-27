@@ -37,7 +37,7 @@ export default function MortgageInputs({initialMortgage = {}, onSubmit, onCancel
             onClick={() => onSubmit(mortgage)}>Save</button>
           <button type="button" className="text-md px-4 py-2 ml-2 cursor-pointer rounded bg-slate-50 border border-slate-800 m-4 text-slate-800"
             onClick={onCancel}>Cancel</button>
-          {initialMortgage && <button type="button" className="text-md px-4 py-2 ml-2 cursor-pointer rounded bg-red-700 m-4 text-white"
+          {initialMortgage?.originalBalance && <button type="button" className="text-md px-4 py-2 ml-2 cursor-pointer rounded bg-red-700 m-4 text-white"
             onClick={onDelete}>Delete</button>}
         </div>
       </form>
