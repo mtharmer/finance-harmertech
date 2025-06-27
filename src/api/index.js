@@ -64,6 +64,18 @@ export const deleteMonthlyExpense = (id) => {
   return client.delete(`/monthly_expenses/${id}`)
 }
 
+export const getMortgage = () => {
+  return client.get('/mortgage');
+}
+
+export const createMortgage = (mortgage) => {
+  return client.post('/mortgage', {mortgage: mortgage})
+}
+
+export const deleteMortgage = () => {
+  return client.delete('/mortgage');
+}
+
 export const login = (user) => {
   return unintercepted.post('/login', user);
 }

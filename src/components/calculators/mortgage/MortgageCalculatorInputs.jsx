@@ -1,6 +1,6 @@
-import NumberInput from '../NumberInput';
+import NumberInput from '../../NumberInput';
 
-export default function MortgageInputs({inputs, onInputChange, onRadioChange}) {
+export default function MortgageCalculatorInputs({inputs, onInputChange, onRadioChange}) {
   return (
     <form className="space-y-4" data-testid='mortgage-container-inputs'>
       <NumberInput label="Loan Amount" name="loanAmount" value={inputs.loanAmount} onChange={onInputChange} data-testid='mortgage-container-loan-amount-input' />

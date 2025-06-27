@@ -10,8 +10,9 @@ export default function Navbar() {
   if (doesSessionExist()) {
     navItems.push(
       { title: 'Debts', ref: '/debts' },
-      { title: 'Monthly Expenses', ref: '/monthlyexpenses'}
-    )
+      { title: 'Monthly Expenses', ref: '/monthlyexpenses'},
+      { title: 'Mortgage', ref: '/mortgage' }
+    );
   }
 
   const authItems = [
@@ -24,12 +25,12 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="bg-slate-800 sticky top-0 z-50">
+    <nav className="sticky top-0 z-50 shadow shadow-slate-400 bg-slate-50">
       <div className="mx-auto h-16 flex justify-between items-center pl-4">
         <ul className="flex space-x-4">
           {navItems.map((item, index) => (
             <li key={item.title}>
-              <a href={item.ref} className="text-white hover:text-slate-300">
+              <a href={item.ref} className="text-slate-800 hover:text-slate-500">
                 {item.title}
               </a>
               {index < navItems.length - 1 && <span className="text-slate-400 pl-4">|</span>}
@@ -41,7 +42,7 @@ export default function Navbar() {
             <>
               {authItems.map((item, index) => (
                 <li key={item.title}>
-                  <a href={item.ref} className="text-white hover:text-slate-300">
+                  <a href={item.ref} className="text-slate-800 hover:text-slate-500">
                     {item.title}
                   </a>
                   {index < authItems.length - 1 && <span className="text-slate-400 pl-4">|</span>}
@@ -49,7 +50,7 @@ export default function Navbar() {
               ))}
               <li>
                 <span className="text-slate-400 pr-4">|</span>
-                <button href="/logout" className="text-white hover:text-slate-300 cursor-pointer" onClick={signOut}>
+                <button className="text-slate-800 hover:text-slate-300 cursor-pointer" onClick={signOut}>
                   Logout
                 </button>
               </li>
@@ -58,7 +59,7 @@ export default function Navbar() {
             <>
               {nonAuthItems.map((item, index) => (
                 <li key={item.title}>
-                  <a href={item.ref} className="text-white hover:text-slate-300">
+                  <a href={item.ref} className="text-slate-800 hover:text-slate-300">
                     {item.title}
                   </a>
                   {index < nonAuthItems.length - 1 && <span className="text-slate-400 pl-4">|</span>}
