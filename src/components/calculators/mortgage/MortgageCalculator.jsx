@@ -40,7 +40,7 @@ export default function MortgageCalculator() {
         Mortgage Calculator
       </h1>
       <div className="flex flex-row justify-start mx-8">
-        <div className="flex flex-col">
+        <div className="flex flex-col p-4 shadow shadow-slate-400">
           <MortgageCalculatorInputs inputs={inputs} onInputChange={handleInputChange} onRadioChange={handleRadioChange} />
         </div>
         <div className="flex flex-col ml-24">

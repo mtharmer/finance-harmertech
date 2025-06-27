@@ -1,4 +1,4 @@
-import NumberInput from '../NumberInput';
+import NumberInput from '../../NumberInput';
 
 export default function MortgageCalculatorInputs({inputs, onInputChange, onRadioChange}) {
   return (
