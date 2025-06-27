@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getMortgage, createMortgage, updateMortgage, deleteMortgage } from "../../api";
+import { getMortgage, createMortgage, deleteMortgage } from "../../api";
 import MortgageInputs from "./MortgageInputs";
 import MortgageDetails from "./MortgageDetails";
 import { alert, success } from "../../utility/notifications";
