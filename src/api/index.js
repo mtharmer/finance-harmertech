@@ -72,10 +72,6 @@ export const createMortgage = (mortgage) => {
   return client.post('/mortgage', {mortgage: mortgage})
 }
 
-export const updateMortgage = (mortgage) => {
-  return client.put('/mortgage', {mortgage: mortgage});
-}
-
 export const deleteMortgage = () => {
   return client.delete('/mortgage');
 }

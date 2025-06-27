@@ -141,8 +141,30 @@ describe('api', () => {
       const spy = vi.spyOn(axios, 'delete').mockResolvedValue({status: 'success'});
       await api.deleteMonthlyExpense(1234);
       expect(spy).toHaveBeenCalledWith('/monthly_expenses/1234');
-    })
-  })
+    });
+  });
+  describe('getMortgage', () => {
+    it('should call on axios.get', async () => {
+      const spy = vi.spyOn(axios, 'get').mockResolvedValue({status: 'success'});
+      await api.getMortgage();
+      expect(spy).toHaveBeenCalledWith('/mortgage');
+    });
+  });
+  describe('createMortgage', () => {
+    it('should call on axios.post', async () => {
+      const data = {originalBalance: 300000, downPayment: 60000, currentBalance: 240000, apr: 3.5, term: 360, payment: 1350, tax: 300, insurance: 100, pmi: 150, extraPayment: 200};
+      const spy = vi.spyOn(axios, 'post').mockResolvedValue({status: 'success'});
+      await api.createMortgage(data);
+      expect(spy).toHaveBeenCalledWith('/mortgage', {mortgage: data});
+    });
+  });
+  describe('deleteMortgage', () => {
+    it('should call on axios.delete', async () => {
+      const spy = vi.spyOn(axios, 'delete').mockResolvedValue({status: 'success'});
+      await api.deleteMortgage();
+      expect(spy).toHaveBeenCalledWith('/mortgage');
+    });
+  });
   describe('login', () => {
     it('should call on axios.post', async () => {
       const creds = {email: 'some@example.com', password: 'somepass'}

@@ -6,7 +6,7 @@ export function formatCurrency(amount) {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
-  }).format(Number(amount))
+  }).format(amount)
 }
 
 export function formatPercent(amount) {

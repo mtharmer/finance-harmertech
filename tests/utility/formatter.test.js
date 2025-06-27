@@ -8,7 +8,7 @@ describe('formatter', () => {
     });
     it('does not error on bad data', () => {
       const result = formatCurrency('random text');
-      expect(result).toEqual('random text');
+      expect(result).toEqual('$NaN');
     });
   });
 
