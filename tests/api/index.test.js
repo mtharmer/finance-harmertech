@@ -1,6 +1,6 @@
 import axios from 'axios';
 import * as api from '../../src/api';
-import { beforeEach } from 'vitest';
+import { beforeEach, describe } from 'vitest';
 
 describe('api', () => {
   beforeEach(() => {
@@ -194,6 +194,23 @@ describe('api', () => {
       const spy = vi.spyOn(axios, 'put').mockResolvedValue({status: 'success'});
       await api.changePassword(creds);
       expect(spy).toHaveBeenCalledWith('/signup', creds);
+    });
+  });
+  describe('requestPasswordReset', () => {
+    it('should call on axios.post', async () => {
+      const email = 'some@example.com';
+      const spy = vi.spyOn(axios, 'post').mockResolvedValue({status: 'success'});
+      await api.requestPasswordReset(email);
+      expect(spy).toHaveBeenCalledWith('/password', {user: {email: email}});
+    });
+  });
+  describe('resetPassword', () => {
+    it('should call on axios.put', async () => {
+      const token = 'sometoken';
+      const password = 'newpassword';
+      const spy = vi.spyOn(axios, 'put').mockResolvedValue({status: 'success'});
+      await api.resetPassword(token, password);
+      expect(spy).toHaveBeenCalledWith('/password', {user: {password: password, resetPasswordToken: token}});
     });
   });
 });
