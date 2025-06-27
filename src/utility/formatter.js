@@ -6,11 +6,11 @@ export function formatCurrency(amount) {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
-  }).format(amount)
+  }).format(amount);
 }
 
 export function formatPercent(amount) {
-  if (!Number(amount)) return amount;
+  if (isNaN(amount)) return amount;
   return new Intl.NumberFormat('en-US', {
     style: 'percent',
     maximumFractionDigits: 3

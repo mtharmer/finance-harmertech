@@ -25,7 +25,6 @@ export default function Mortgage() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    console.log(event.target);
     const mortgage = event.target;
     const mortgageData = {
       originalBalance: mortgage.originalBalance?.value,
