@@ -44,6 +44,9 @@ export default function Login() {
           >
             Login
           </button>
+          <button type="button" className="w-full mt-4 cursor-pointer text-blue-600 hover:underline" onClick={() => window.location.href = '/password/reset'}>
+            Forgot Password?
+          </button>
         </form>
       </div>
     </div>

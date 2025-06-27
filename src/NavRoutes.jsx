@@ -8,6 +8,8 @@ import hasSession from "./utility/hasSession";
 import MonthlyExpenses from "./components/monthlyExpenses/MonthlyExpenses";
 import ChangePassword from "./components/auth/ChangePassword";
 import Mortgage from "./components/mortgage/Mortgage";
+import RequestPasswordReset from "./components/auth/RequestPasswordReset";
+import ResetPassword from "./components/auth/ResetPassword";
 
 export default function NavRoutes() {
   return (
@@ -20,6 +22,8 @@ export default function NavRoutes() {
       <Route path="/monthlyexpenses" element={hasSession() ? <MonthlyExpenses /> : <Navigate to='/' />} />
       <Route path='/changepassword' element={hasSession() ? <ChangePassword /> : <Navigate to='/' />} />
       <Route path='/mortgage' element={hasSession() ? <Mortgage /> : <Navigate to='/' />} />
+      <Route path='/password/reset' element={<RequestPasswordReset />} />
+      <Route path='/password/edit' element={<ResetPassword />} />
     </Routes>
   );
 }

@@ -91,3 +91,11 @@ export const logout = () => {
 export const changePassword = (user) => {
   return client.put('/signup', user);
 }
+
+export const requestPasswordReset = (email) => {
+  return unintercepted.post('/password', {user: {email: email}});
+}
+
+export const resetPassword = (token, password) => {
+  return unintercepted.put(`/password`, {user: {password: password, resetPasswordToken: token}});
+}
