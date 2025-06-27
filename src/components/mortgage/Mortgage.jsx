@@ -28,16 +28,16 @@ export default function Mortgage() {
     console.log(event.target);
     const mortgage = event.target;
     const mortgageData = {
-      originalBalance: mortgage.originalBalance.value,
-      downPayment: mortgage.downPayment.value,
-      currentBalance: mortgage.currentBalance.value,
-      apr: mortgage.apr.value,
-      term: mortgage.term.value,
-      payment: mortgage.payment.value,
-      tax: mortgage.tax.value,
-      insurance: mortgage.insurance.value,
-      pmi: mortgage.pmi.value,
-      extraPayment: mortgage.extraPayment.value,
+      originalBalance: mortgage.originalBalance?.value,
+      downPayment: mortgage.downPayment?.value,
+      currentBalance: mortgage.currentBalance?.value,
+      apr: mortgage.apr?.value,
+      term: mortgage.term?.value,
+      payment: mortgage.payment?.value,
+      tax: mortgage.tax?.value,
+      insurance: mortgage.insurance?.value,
+      pmi: mortgage.pmi?.value,
+      extraPayment: mortgage.extraPayment?.value,
     };
     try {
       await createMortgage(mortgageData);
