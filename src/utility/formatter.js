@@ -1,5 +1,5 @@
 export function formatCurrency(amount) {
-  if (!amount) return amount;
+  if (isNaN(amount)) return amount;
   if (typeof amount === 'string') {
     amount = Number(amount);
   }

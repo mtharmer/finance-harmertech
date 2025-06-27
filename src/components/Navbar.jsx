@@ -59,7 +59,7 @@ export default function Navbar() {
             <>
               {nonAuthItems.map((item, index) => (
                 <li key={item.title}>
-                  <a href={item.ref} className="text-slate-800 hover:text-slate5300">
+                  <a href={item.ref} className="text-slate-800 hover:text-slate-300">
                     {item.title}
                   </a>
                   {index < nonAuthItems.length - 1 && <span className="text-slate-400 pl-4">|</span>}
