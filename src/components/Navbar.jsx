@@ -50,7 +50,7 @@ export default function Navbar() {
               ))}
               <li>
                 <span className="text-slate-400 pr-4">|</span>
-                <button href="/logout" className="text-slate-800 hover:text-slate-300 cursor-pointer" onClick={signOut}>
+                <button className="text-slate-800 hover:text-slate-300 cursor-pointer" onClick={signOut}>
                   Logout
                 </button>
               </li>

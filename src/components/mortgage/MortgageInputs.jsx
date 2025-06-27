@@ -15,7 +15,7 @@ export default function MortgageInputs({initialMortgage = {}, onSubmit, onCancel
 
   return (
     <div className="flex justify-center mx-16 p-8 shadow-md shadow-slate-700" data-testid="mortgage-inputs">
-      <form className="space-y-4">
+      <form className="space-y-4" onSubmit={onSubmit}>
         <div className="flex flex-row">
           <div className="flex flex-col min-w-72">
             <NumberInput label="Original Balance" name="originalBalance" value={mortgage.originalBalance} onChange={handleChange} required data-testid='mortgage-inputs-original-balance' /> 
@@ -34,7 +34,7 @@ export default function MortgageInputs({initialMortgage = {}, onSubmit, onCancel
         </div>
         <div className="flex justify-center">
           <button type="submit" className="text-md px-4 py-2 cursor-pointer rounded bg-blue-700 m-4 text-white"
-            onClick={() => onSubmit(mortgage)}>Save</button>
+            >Save</button>
           <button type="button" className="text-md px-4 py-2 ml-2 cursor-pointer rounded bg-slate-50 border border-slate-800 m-4 text-slate-800"
             onClick={onCancel}>Cancel</button>
           {initialMortgage?.originalBalance && <button type="button" className="text-md px-4 py-2 ml-2 cursor-pointer rounded bg-red-700 m-4 text-white"
