@@ -88,7 +88,7 @@ export default function Debts() {
     <>
       {modifying.editing && <DebtModal onClickSave={handleUpdateDebt} onClickClose={handleClose} initialDebt={selectedDebt} isEditing onClickDelete={handleDelete} /> }
       {modifying.creating && <DebtModal onClickSave={handleSaveNewDebt} onClickClose={handleClose} initialDebt={{}} /> }
-      <div className="mx-2">
+      <div className="mx-32">
         <h1 className="text-5xl font-bold text-center my-10" data-testid="debts-header">Debts</h1>
         {debts.length && debts.length > 0 && <DebtSummary debts={debts} />}
         <div className="flex flex-col justify-center content-center rounded-2xl text-center my-4 mx-16">
